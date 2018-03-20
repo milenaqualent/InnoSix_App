@@ -1,0 +1,88 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "PortfolioItemsGridView";
+        settings.CallbackRouteValues = new { Controller = "Portfolios", Action = "PortfolioItemsGridViewPartial", id = (long)ViewData["PortfolioId"] };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Portfolios", Action = "PortfolioItemsGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Portfolios", Action = "PortfolioItemsGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Portfolios", Action = "PortfolioItemsGridViewPartialDelete", portfolioId = (long)ViewData["PortfolioId"] };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = false;
+
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "#";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Edit", "EditPortfolioItem", new {id = DataBinder.Eval(c.DataItem, "Id"), tcId = DataBinder.Eval(c.DataItem, "TCid"), portfolioId = (long)ViewData["PortfolioId"] })
+                    );
+            });
+            column.Settings.AllowDragDrop = DefaultBoolean.False;
+            column.Settings.AllowSort = DefaultBoolean.False;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "#";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Save as HTML", "SendCompanyReportAsHtml", "Portfolios", new { id = DataBinder.Eval(c.DataItem, "Id"), tcId = DataBinder.Eval(c.DataItem, "TCid") }, new { target = "_blank" })
+                );
+            });
+            column.Settings.AllowDragDrop = DefaultBoolean.False;
+            column.Settings.AllowSort = DefaultBoolean.False;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "#";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Save as PDF", "PrintCompanyReport", "Portfolios", new { id = DataBinder.Eval(c.DataItem, "Id"), tcId = DataBinder.Eval(c.DataItem, "TCid") }, new { target = "_blank" })
+                );
+            });
+            column.Settings.AllowDragDrop = DefaultBoolean.False;
+            column.Settings.AllowSort = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Report";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Show Report", "CompanyReport", new {id = DataBinder.Eval(c.DataItem, "Id"), tcId = DataBinder.Eval(c.DataItem, "TCid")})
+                );
+            });
+            column.Settings.AllowDragDrop = DefaultBoolean.False;
+            column.Settings.AllowSort = DefaultBoolean.False;
+        });
+        settings.Columns.Add("TCBasicInfo.CompanyName");
+        settings.Columns.Add("Stage.Name").Caption = "Stage Name";
+
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

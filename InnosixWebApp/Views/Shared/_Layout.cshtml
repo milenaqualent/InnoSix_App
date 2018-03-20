@@ -1,0 +1,156 @@
+﻿@using DevExpress.Web.Mvc.UI
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/site.js"></script>
+</head>
+<body>
+
+
+    @Html.DevExpress().GetStyleSheets(
+    new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.CardView },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Chart },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.RichEdit },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Spreadsheet },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.SpellChecker }
+)
+    @Html.DevExpress().GetScripts(
+    new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+    new Script { ExtensionSuite = ExtensionSuite.HtmlEditor },
+    new Script { ExtensionSuite = ExtensionSuite.GridView },
+    new Script { ExtensionSuite = ExtensionSuite.CardView },
+    new Script { ExtensionSuite = ExtensionSuite.PivotGrid },
+    new Script { ExtensionSuite = ExtensionSuite.Editors },
+    new Script { ExtensionSuite = ExtensionSuite.Chart },
+    new Script { ExtensionSuite = ExtensionSuite.Report },
+    new Script { ExtensionSuite = ExtensionSuite.Scheduler },
+    new Script { ExtensionSuite = ExtensionSuite.TreeList },
+    new Script { ExtensionSuite = ExtensionSuite.RichEdit },
+    new Script { ExtensionSuite = ExtensionSuite.Spreadsheet },
+    new Script { ExtensionSuite = ExtensionSuite.SpellChecker }
+)
+
+    @using Microsoft.AspNet.Identity
+
+    <section id="header" class="navbar-fixed-top">
+        <div class="navbar navbar-inverse">
+            <div class="container">
+
+                <div class="row">
+                    <div class="logo col-xs-6 col">
+                        <a href="/">
+                            <img src="~/Content/imgs/innosix-logo.png" />
+                        </a>
+                    </div>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="col-xs-6 col text-right">
+                            <div class="row">
+                                <div class="col col-xs-12">
+                                    <p>@("Hello " + User.Identity.GetUserName() + "!")</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-xs-12 edit-profile-link">
+
+                                    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                                    {
+                                        @Html.ActionLink("Manage account", "Index", "Manage")
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-inverse dark-blue-nav-menu">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col col-xs-12">
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                                {
+                                    <li>@Html.ActionLink("Tech companies", "TechCompanies", "Admin")</li>
+                                    <li>@Html.ActionLink("Tags", "Index", "Tags")</li>
+                                    <li>@Html.ActionLink("Taxonomies", "Index", "Taxonomies")</li>
+                                    <li>@Html.ActionLink("User management", "Index", "UserManager")</li>
+                                    <li>@Html.ActionLink("Tech company claims", "Index", "Claims")</li>
+                                }
+                                
+                                @if (Request.IsAuthenticated && User.IsInRole("User"))
+                                {
+                                    <li>@Html.ActionLink("Portfolios", "Index", "Portfolios")</li>
+                                    <li>@Html.ActionLink("Stages", "Index", "Stages")</li>
+                                }
+
+                                @Html.Action("Index", "TcEditNavbar")
+
+                            </ul>
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container body-content">
+        @RenderBody()
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col col-xs-12">
+                    <p>&copy; @DateTime.Now.Year - <a href="http://innosix.com/" target="_blank">Innosix</a> All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        if (!String.prototype.format) {
+            String.prototype.format = function () {
+                var args = arguments;
+                return this.replace(/{(\d+)}/g, function (match, number) {
+                    return typeof args[number] != 'undefined'
+                            ? args[number]
+                            : match;
+                });
+            };
+        }
+    </script>
+</body>
+</html>

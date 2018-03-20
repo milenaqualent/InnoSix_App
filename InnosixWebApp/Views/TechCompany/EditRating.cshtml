@@ -1,0 +1,142 @@
+﻿@model InnosixWebApp.Models.TCRating
+
+@{
+    ViewBag.Title = "Edit Rating";
+}
+
+<section class="edit-company-details">
+    
+    @Html.Partial("NavigationEditMenu")
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal edit-technology mt-15">
+            
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model => model.TCid)
+
+            <div class="form-group mt-15">
+                @Html.LabelFor(model => model.Financials, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Financials, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.Financials, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Fundamentals, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Fundamentals, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.Fundamentals, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Market, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Market, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.Market, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ManagementAndExecution, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ManagementAndExecution, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.ManagementAndExecution, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BML, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.BML, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.BML, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BMLConfidenceIndex, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.BMLConfidenceIndex, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.BMLConfidenceIndex, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IntellectualProperty, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.IntellectualProperty, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.IntellectualProperty, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Technology, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Technology, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.Technology, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TechnologyRisk, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.TechnologyRisk, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.TechnologyRisk, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TML, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.TML, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.TML, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TMLConfidenceIndex, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.TMLConfidenceIndex, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.TMLConfidenceIndex, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OverallRating, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.OverallRating, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.OverallRating, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OverallRatingConfidenceIndex, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.OverallRatingConfidenceIndex, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.OverallRatingConfidenceIndex, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RatingDate, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.RatingDate, new {htmlAttributes = new {@class = "form-control edit-form-input"}})
+                    @Html.ValidationMessageFor(model => model.RatingDate, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group row mt-15">
+                <div class="col-md-6">
+                    @Html.ActionLink("Back", "TechCompanies", "Admin", null, new {@class = "btn btn-default"})
+                </div>
+                <div class="col-md-6 text-right">
+                    <input type="submit" value="Save" class="btn btn-primary"/>
+                </div>
+            </div>
+        </div>
+    }
+</section>

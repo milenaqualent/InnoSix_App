@@ -1,0 +1,95 @@
+﻿@model InnosixWebApp.Models.ClaimFormViewModel
+
+@{
+    ViewBag.Title = "Claim Form";
+}
+
+<h2 class="title">Claim Form</h2>
+
+<div class="row">
+    <div class="col-xs-12">
+        @ViewBag.Message
+    </div>
+</div>
+
+<div class="row mt-15">
+    <div class="col-xs-12 col-md-6">
+        <div class="row">
+            <div class="col-xs-4">
+                @Html.LabelFor(model => model.TcBasicInfo.CompanyName, "Company name")
+            </div>
+            <div class="col-xs-8">
+                <label class="text-dark">@Html.DisplayFor(model => model.TcBasicInfo.CompanyName)</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="row">
+            <div class="col-xs-4">
+                @Html.LabelFor(model => model.TcBasicInfo.CompanyWebsite, "Company website")
+            </div>
+            <div class="col-xs-8">
+                <label class="text-dark">@Html.DisplayFor(model => model.TcBasicInfo.CompanyWebsite)</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <div class="row">
+            <div class="col-xs-4">
+                @Html.LabelFor(model => model.TcBasicInfo.CompanyPhone, "Company phone")
+            </div>
+            <div class="col-xs-8">
+                <label class="text-dark">@Html.DisplayFor(model => model.TcBasicInfo.CompanyPhone)</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="row">
+            <div class="col-xs-4">
+                @Html.LabelFor(model => model.TcBasicInfo.CompanyEmail, "Company email")
+            </div>
+            <div class="col-xs-8">
+                <label class="text-dark">@Html.DisplayFor(model => model.TcBasicInfo.CompanyEmail)</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@using (Html.BeginForm("ClaimForm", "TechCompany", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.AspNetUsersTcClaim.TCid)
+
+    <div class="form-horizontal mt-15">
+        <div class="form-group">
+            <label class="control-label col-md-2">Description <span class="text-danger">*</span></label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.AspNetUsersTcClaim.Description, new { @class = "form-control edit-form-input", maxlength = "1500", required = "required" })
+                @Html.ValidationMessageFor(model => model.AspNetUsersTcClaim.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">PhoneNumber <span class="text-danger">*</span></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AspNetUsersTcClaim.PhoneNumber, new { htmlAttributes = new { @class = "form-control edit-form-input", required = "required" } })
+                @Html.ValidationMessageFor(model => model.AspNetUsersTcClaim.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row mt-15">
+            <div class="col-md-6">
+                @Html.ActionLink("Back to create", "Index", "TechCompany", null, new { @class = "btn btn-default" })
+            </div>
+            <div class="col-md-6 text-right">
+                <input type="submit" value="Claim" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+

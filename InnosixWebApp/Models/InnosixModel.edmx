@@ -1,0 +1,3181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InnosixModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountManagerName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersTcClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1500" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersToPortfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PortfolioId" Type="bigint" Nullable="false" />
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersToStage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusinessModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusinessModelName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="BusinessModelToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="BusinessModelId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cluster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClusterName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="Maturity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaturityStageName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="Nace">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NACEcode" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Portfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="NrOfTCs" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PortfolioItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="StageId" Type="int" />
+          <Property Name="NextMoveId" Type="int" />
+          <Property Name="NextMoveDate" Type="date" />
+          <Property Name="ResponsibleEmail" Type="nvarchar" MaxLength="200" />
+          <Property Name="ResponsibleName" Type="nvarchar" MaxLength="200" />
+          <Property Name="OpportunityDate" Type="date" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="PortfolioToPortfolioItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PortfolioId" Type="bigint" Nullable="false" />
+          <Property Name="PortfolioItemId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ProductDescription" Type="nvarchar" MaxLength="1500" Nullable="false" />
+          <Property Name="ProductImage" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ProductToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="ProductId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Revenue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RevenueName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServicesName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="ServicesToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="ServicesId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TCActive">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TCAdmin">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="ClusterRelationId" Type="int" />
+          <Property Name="FreetextNoteField" Type="nvarchar" MaxLength="1500" />
+          <Property Name="InnosixAccountManagerId" Type="int" />
+          <Property Name="Source" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TCBasicInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="200" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="200" />
+          <Property Name="Address3" Type="nvarchar" MaxLength="200" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="200" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="CompanyEmail" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CompanyPhone" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LegalSuffix" Type="nvarchar" MaxLength="200" />
+          <Property Name="CompanyWebsite" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LogoUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="RegistrationNumber" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TCBusinessInfo">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="BusinessSummary" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="CompanyDescription" Type="nvarchar" MaxLength="1500" />
+          <Property Name="NaceCodeId" Type="int" />
+          <Property Name="RevenueYear" Type="int" />
+          <Property Name="FullTimeEmployeesId" Type="int" />
+          <Property Name="FTEyear" Type="int" />
+          <Property Name="KeyCompetitors" Type="nvarchar" MaxLength="200" />
+          <Property Name="KeyPartners" Type="nvarchar" MaxLength="200" />
+          <Property Name="LargestOwners" Type="nvarchar" MaxLength="200" />
+          <Property Name="MaturityStageId" Type="int" />
+          <Property Name="ProfitMaking" Type="bit" Nullable="false" />
+          <Property Name="RevenueId" Type="int" />
+          <Property Name="Established" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TCContact">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="ContactPersonEmail" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ContactPersonPhone" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ContactPersonName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TCGeneral">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="Created" Type="date" Nullable="false" />
+          <Property Name="LastUpdated" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TCIdealPartner">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="IdealCorporatePartnerNace" Type="int" />
+          <Property Name="IdealCorporatePartnerName" Type="nvarchar" MaxLength="500" />
+          <Property Name="IdealCorporatePartnerTechnologyFocus" Type="int" />
+        </EntityType>
+        <EntityType Name="TCRating">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="Financials" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="Fundamentals" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="Market" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="ManagementAndExecution" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="BML" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="BMLConfidenceIndex" Type="int" Nullable="false" />
+          <Property Name="IntellectualProperty" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="Technology" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="TechnologyRisk" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="TML" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="TMLConfidenceIndex" Type="int" Nullable="false" />
+          <Property Name="OverallRating" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="OverallRatingConfidenceIndex" Type="int" Nullable="false" />
+          <Property Name="RatingDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TCTechnology">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="AdditionalTechTags" Type="nvarchar" MaxLength="200" />
+          <Property Name="Patents" Type="nvarchar" MaxLength="500" />
+          <Property Name="OtherIpNotPatented" Type="nvarchar" MaxLength="200" />
+          <Property Name="TechnologySectorId" Type="int" />
+        </EntityType>
+        <EntityType Name="TechDomain">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DomainName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="TechDomainToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="TechDomainId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TechSector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TechSectorName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="TechTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ParentsCount" Type="int" />
+          <Property Name="ChildrenCount" Type="int" />
+          <Property Name="UsageCount" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="TechTagDeclined">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagName" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TechTagParents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TechTagId" Type="int" Nullable="false" />
+          <Property Name="ParentTechTagId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TechTagToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCid" Type="bigint" Nullable="false" />
+          <Property Name="TechTagId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Innosix.dbo.VTcClaim' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VTcClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="CompanyEmail" />
+            <PropertyRef Name="CompanyWebsite" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CompanyEmail" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LegalSuffix" Type="nvarchar" MaxLength="200" />
+          <Property Name="CompanyWebsite" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TechTags" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Innosix.dbo.VTcWithTags' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VTcWithTags">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="CompanyEmail" />
+            <PropertyRef Name="CompanyWebsite" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="Country" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CompanyEmail" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LegalSuffix" Type="nvarchar" MaxLength="200" />
+          <Property Name="CompanyWebsite" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="TechTags" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Innosix.dbo.VTcWithTagsUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VTcWithTagsUser">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="CompanyEmail" />
+            <PropertyRef Name="CompanyWebsite" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="Country" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CompanyEmail" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LegalSuffix" Type="nvarchar" MaxLength="200" />
+          <Property Name="CompanyWebsite" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TechTags" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Innosix.dbo.VUserTcClaim' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VUserTcClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="PhoneNumber" />
+            <PropertyRef Name="TcId" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="CountryName" />
+            <PropertyRef Name="CompanyEmail" />
+            <PropertyRef Name="CompanyWebsite" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1500" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TcId" Type="bigint" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CompanyEmail" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LegalSuffix" Type="nvarchar" MaxLength="200" />
+          <Property Name="CompanyWebsite" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AspNetUsersTcClaim_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersTcClaim" Type="Self.AspNetUsersTcClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersTcClaim">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersTcClaim_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="AspNetUsersTcClaim" Type="Self.AspNetUsersTcClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersTcClaim">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToPortfolio_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersToPortfolio" Type="Self.AspNetUsersToPortfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToPortfolio">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToPortfolio_Portfolio">
+          <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="1" />
+          <End Role="AspNetUsersToPortfolio" Type="Self.AspNetUsersToPortfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Portfolio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToPortfolio">
+              <PropertyRef Name="PortfolioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToStage_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersToStage" Type="Self.AspNetUsersToStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToStage">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToStage_Stage">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="1" />
+          <End Role="AspNetUsersToStage" Type="Self.AspNetUsersToStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToStage">
+              <PropertyRef Name="StageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToTC_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersToTC" Type="Self.AspNetUsersToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToTC">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="AspNetUsersToTC" Type="Self.AspNetUsersToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusinessModelToTC_BusinessModel">
+          <End Role="BusinessModel" Type="Self.BusinessModel" Multiplicity="1" />
+          <End Role="BusinessModelToTC" Type="Self.BusinessModelToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessModelToTC">
+              <PropertyRef Name="BusinessModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusinessModelToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="BusinessModelToTC" Type="Self.BusinessModelToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessModelToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PorftolioItem_Stage">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
+          <End Role="PortfolioItem" Type="Self.PortfolioItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PortfolioItem">
+              <PropertyRef Name="StageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PorftolioItem_Stage1">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
+          <End Role="PortfolioItem" Type="Self.PortfolioItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PortfolioItem">
+              <PropertyRef Name="NextMoveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PorftolioItem_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="PortfolioItem" Type="Self.PortfolioItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PortfolioItem">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PortfolioToPortfolioItem_Portfolio">
+          <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="1" />
+          <End Role="PortfolioToPortfolioItem" Type="Self.PortfolioToPortfolioItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Portfolio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PortfolioToPortfolioItem">
+              <PropertyRef Name="PortfolioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PortfolioToPortfolioItem_PortfolioItem">
+          <End Role="PortfolioItem" Type="Self.PortfolioItem" Multiplicity="1" />
+          <End Role="PortfolioToPortfolioItem" Type="Self.PortfolioToPortfolioItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PortfolioItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PortfolioToPortfolioItem">
+              <PropertyRef Name="PortfolioItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductToTC_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductToTC" Type="Self.ProductToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductToTC">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="ProductToTC" Type="Self.ProductToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicesToTC_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="ServicesToTC" Type="Self.ServicesToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServicesToTC">
+              <PropertyRef Name="ServicesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicesToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="ServicesToTC" Type="Self.ServicesToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServicesToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCActive_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCActive" Type="Self.TCActive" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCActive">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCAdmin_AccountManager">
+          <End Role="AccountManager" Type="Self.AccountManager" Multiplicity="0..1" />
+          <End Role="TCAdmin" Type="Self.TCAdmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountManager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCAdmin">
+              <PropertyRef Name="InnosixAccountManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCAdmin_Cluster">
+          <End Role="Cluster" Type="Self.Cluster" Multiplicity="0..1" />
+          <End Role="TCAdmin" Type="Self.TCAdmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cluster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCAdmin">
+              <PropertyRef Name="ClusterRelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCAdmin_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCAdmin" Type="Self.TCAdmin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCAdmin">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBasicInfo_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBasicInfo">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBusinessInfo_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="TCBusinessInfo" Type="Self.TCBusinessInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBusinessInfo">
+              <PropertyRef Name="FullTimeEmployeesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBusinessInfo_Maturity">
+          <End Role="Maturity" Type="Self.Maturity" Multiplicity="0..1" />
+          <End Role="TCBusinessInfo" Type="Self.TCBusinessInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maturity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBusinessInfo">
+              <PropertyRef Name="MaturityStageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBusinessInfo_Nace">
+          <End Role="Nace" Type="Self.Nace" Multiplicity="0..1" />
+          <End Role="TCBusinessInfo" Type="Self.TCBusinessInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nace">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBusinessInfo">
+              <PropertyRef Name="NaceCodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBusinessInfo_Revenue">
+          <End Role="Revenue" Type="Self.Revenue" Multiplicity="0..1" />
+          <End Role="TCBusinessInfo" Type="Self.TCBusinessInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Revenue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBusinessInfo">
+              <PropertyRef Name="RevenueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBusinessInfo_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCBusinessInfo" Type="Self.TCBusinessInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBusinessInfo">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCContact_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCContact" Type="Self.TCContact" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCContact">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCGeneral_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCGeneral" Type="Self.TCGeneral" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCGeneral">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCIdealPartner_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCIdealPartner" Type="Self.TCIdealPartner" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCIdealPartner">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCRating_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCRating" Type="Self.TCRating" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCRating">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCTechnology_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCTechnology" Type="Self.TCTechnology" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCTechnology">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCTechnology_TechSector">
+          <End Role="TechSector" Type="Self.TechSector" Multiplicity="0..1" />
+          <End Role="TCTechnology" Type="Self.TCTechnology" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TechSector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCTechnology">
+              <PropertyRef Name="TechnologySectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechDomainToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TechDomainToTC" Type="Self.TechDomainToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechDomainToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechDomainToTC_TechDomain">
+          <End Role="TechDomain" Type="Self.TechDomain" Multiplicity="1" />
+          <End Role="TechDomainToTC" Type="Self.TechDomainToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TechDomain">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechDomainToTC">
+              <PropertyRef Name="TechDomainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechTagParents_TechTag">
+          <End Role="TechTag" Type="Self.TechTag" Multiplicity="1" />
+          <End Role="TechTagParents" Type="Self.TechTagParents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TechTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechTagParents">
+              <PropertyRef Name="TechTagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechTagParents_TechTag_Parent">
+          <End Role="TechTag" Type="Self.TechTag" Multiplicity="1" />
+          <End Role="TechTagParents" Type="Self.TechTagParents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TechTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechTagParents">
+              <PropertyRef Name="ParentTechTagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechTagToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TechTagToTC" Type="Self.TechTagToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechTagToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechTagToTC_TechTag">
+          <End Role="TechTag" Type="Self.TechTag" Multiplicity="1" />
+          <End Role="TechTagToTC" Type="Self.TechTagToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TechTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechTagToTC">
+              <PropertyRef Name="TechTagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetAdditionalTechTags" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetTagHierarchy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="InnosixModelStoreContainer">
+          <EntitySet Name="AccountManager" EntityType="Self.AccountManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersTcClaim" EntityType="Self.AspNetUsersTcClaim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersToPortfolio" EntityType="Self.AspNetUsersToPortfolio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersToStage" EntityType="Self.AspNetUsersToStage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersToTC" EntityType="Self.AspNetUsersToTC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusinessModel" EntityType="Self.BusinessModel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusinessModelToTC" EntityType="Self.BusinessModelToTC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cluster" EntityType="Self.Cluster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maturity" EntityType="Self.Maturity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nace" EntityType="Self.Nace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Portfolio" EntityType="Self.Portfolio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortfolioItem" EntityType="Self.PortfolioItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortfolioToPortfolioItem" EntityType="Self.PortfolioToPortfolioItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductToTC" EntityType="Self.ProductToTC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Revenue" EntityType="Self.Revenue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicesToTC" EntityType="Self.ServicesToTC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stage" EntityType="Self.Stage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TCActive" EntityType="Self.TCActive" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TCAdmin" EntityType="Self.TCAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TCBasicInfo" EntityType="Self.TCBasicInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TCBusinessInfo" EntityType="Self.TCBusinessInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TCContact" EntityType="Self.TCContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TCGeneral" EntityType="Self.TCGeneral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TCIdealPartner" EntityType="Self.TCIdealPartner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TCRating" EntityType="Self.TCRating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TCTechnology" EntityType="Self.TCTechnology" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TechDomain" EntityType="Self.TechDomain" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TechDomainToTC" EntityType="Self.TechDomainToTC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TechSector" EntityType="Self.TechSector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TechTag" EntityType="Self.TechTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TechTagDeclined" EntityType="Self.TechTagDeclined" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TechTagParents" EntityType="Self.TechTagParents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TechTagToTC" EntityType="Self.TechTagToTC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VTcClaim" EntityType="Self.VTcClaim" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VTcClaim].[Id] AS [Id], 
+    [VTcClaim].[CompanyName] AS [CompanyName], 
+    [VTcClaim].[City] AS [City], 
+    [VTcClaim].[Country] AS [Country], 
+    [VTcClaim].[CompanyEmail] AS [CompanyEmail], 
+    [VTcClaim].[LegalSuffix] AS [LegalSuffix], 
+    [VTcClaim].[CompanyWebsite] AS [CompanyWebsite], 
+    [VTcClaim].[TechTags] AS [TechTags]
+    FROM [dbo].[VTcClaim] AS [VTcClaim]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VTcWithTags" EntityType="Self.VTcWithTags" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VTcWithTags].[Id] AS [Id], 
+    [VTcWithTags].[CompanyName] AS [CompanyName], 
+    [VTcWithTags].[City] AS [City], 
+    [VTcWithTags].[Country] AS [Country], 
+    [VTcWithTags].[CompanyEmail] AS [CompanyEmail], 
+    [VTcWithTags].[LegalSuffix] AS [LegalSuffix], 
+    [VTcWithTags].[CompanyWebsite] AS [CompanyWebsite], 
+    [VTcWithTags].[IsActive] AS [IsActive], 
+    [VTcWithTags].[TechTags] AS [TechTags]
+    FROM [dbo].[VTcWithTags] AS [VTcWithTags]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VTcWithTagsUser" EntityType="Self.VTcWithTagsUser" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VTcWithTagsUser].[Id] AS [Id], 
+    [VTcWithTagsUser].[CompanyName] AS [CompanyName], 
+    [VTcWithTagsUser].[City] AS [City], 
+    [VTcWithTagsUser].[Country] AS [Country], 
+    [VTcWithTagsUser].[CompanyEmail] AS [CompanyEmail], 
+    [VTcWithTagsUser].[LegalSuffix] AS [LegalSuffix], 
+    [VTcWithTagsUser].[CompanyWebsite] AS [CompanyWebsite], 
+    [VTcWithTagsUser].[TechTags] AS [TechTags]
+    FROM [dbo].[VTcWithTagsUser] AS [VTcWithTagsUser]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VUserTcClaim" EntityType="Self.VUserTcClaim" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VUserTcClaim].[Id] AS [Id], 
+    [VUserTcClaim].[UserId] AS [UserId], 
+    [VUserTcClaim].[Email] AS [Email], 
+    [VUserTcClaim].[Description] AS [Description], 
+    [VUserTcClaim].[PhoneNumber] AS [PhoneNumber], 
+    [VUserTcClaim].[TcId] AS [TcId], 
+    [VUserTcClaim].[CompanyName] AS [CompanyName], 
+    [VUserTcClaim].[City] AS [City], 
+    [VUserTcClaim].[CountryName] AS [CountryName], 
+    [VUserTcClaim].[CompanyEmail] AS [CompanyEmail], 
+    [VUserTcClaim].[LegalSuffix] AS [LegalSuffix], 
+    [VUserTcClaim].[CompanyWebsite] AS [CompanyWebsite], 
+    [VUserTcClaim].[IsActive] AS [IsActive]
+    FROM [dbo].[VUserTcClaim] AS [VUserTcClaim]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AspNetUsersTcClaim_AspNetUsers" Association="Self.FK_AspNetUsersTcClaim_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersTcClaim" EntitySet="AspNetUsersTcClaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersTcClaim_TCBasicInfo" Association="Self.FK_AspNetUsersTcClaim_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="AspNetUsersTcClaim" EntitySet="AspNetUsersTcClaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToPortfolio_AspNetUsers" Association="Self.FK_AspNetUsersToPortfolio_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersToPortfolio" EntitySet="AspNetUsersToPortfolio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToPortfolio_Portfolio" Association="Self.FK_AspNetUsersToPortfolio_Portfolio">
+            <End Role="Portfolio" EntitySet="Portfolio" />
+            <End Role="AspNetUsersToPortfolio" EntitySet="AspNetUsersToPortfolio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToStage_AspNetUsers" Association="Self.FK_AspNetUsersToStage_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersToStage" EntitySet="AspNetUsersToStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToStage_Stage" Association="Self.FK_AspNetUsersToStage_Stage">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="AspNetUsersToStage" EntitySet="AspNetUsersToStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToTC_AspNetUsers" Association="Self.FK_AspNetUsersToTC_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersToTC" EntitySet="AspNetUsersToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToTC_TCBasicInfo" Association="Self.FK_AspNetUsersToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="AspNetUsersToTC" EntitySet="AspNetUsersToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusinessModelToTC_BusinessModel" Association="Self.FK_BusinessModelToTC_BusinessModel">
+            <End Role="BusinessModel" EntitySet="BusinessModel" />
+            <End Role="BusinessModelToTC" EntitySet="BusinessModelToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusinessModelToTC_TCBasicInfo" Association="Self.FK_BusinessModelToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="BusinessModelToTC" EntitySet="BusinessModelToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PorftolioItem_Stage" Association="Self.FK_PorftolioItem_Stage">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="PortfolioItem" EntitySet="PortfolioItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PorftolioItem_Stage1" Association="Self.FK_PorftolioItem_Stage1">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="PortfolioItem" EntitySet="PortfolioItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PorftolioItem_TCBasicInfo" Association="Self.FK_PorftolioItem_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="PortfolioItem" EntitySet="PortfolioItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PortfolioToPortfolioItem_Portfolio" Association="Self.FK_PortfolioToPortfolioItem_Portfolio">
+            <End Role="Portfolio" EntitySet="Portfolio" />
+            <End Role="PortfolioToPortfolioItem" EntitySet="PortfolioToPortfolioItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PortfolioToPortfolioItem_PortfolioItem" Association="Self.FK_PortfolioToPortfolioItem_PortfolioItem">
+            <End Role="PortfolioItem" EntitySet="PortfolioItem" />
+            <End Role="PortfolioToPortfolioItem" EntitySet="PortfolioToPortfolioItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductToTC_Product" Association="Self.FK_ProductToTC_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductToTC" EntitySet="ProductToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductToTC_TCBasicInfo" Association="Self.FK_ProductToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="ProductToTC" EntitySet="ProductToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicesToTC_Services" Association="Self.FK_ServicesToTC_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="ServicesToTC" EntitySet="ServicesToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicesToTC_TCBasicInfo" Association="Self.FK_ServicesToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="ServicesToTC" EntitySet="ServicesToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCActive_TCBasicInfo" Association="Self.FK_TCActive_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCActive" EntitySet="TCActive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCAdmin_AccountManager" Association="Self.FK_TCAdmin_AccountManager">
+            <End Role="AccountManager" EntitySet="AccountManager" />
+            <End Role="TCAdmin" EntitySet="TCAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCAdmin_Cluster" Association="Self.FK_TCAdmin_Cluster">
+            <End Role="Cluster" EntitySet="Cluster" />
+            <End Role="TCAdmin" EntitySet="TCAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCAdmin_TCBasicInfo" Association="Self.FK_TCAdmin_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCAdmin" EntitySet="TCAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBasicInfo_Country" Association="Self.FK_TCBasicInfo_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBusinessInfo_Employees" Association="Self.FK_TCBusinessInfo_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="TCBusinessInfo" EntitySet="TCBusinessInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBusinessInfo_Maturity" Association="Self.FK_TCBusinessInfo_Maturity">
+            <End Role="Maturity" EntitySet="Maturity" />
+            <End Role="TCBusinessInfo" EntitySet="TCBusinessInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBusinessInfo_Nace" Association="Self.FK_TCBusinessInfo_Nace">
+            <End Role="Nace" EntitySet="Nace" />
+            <End Role="TCBusinessInfo" EntitySet="TCBusinessInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBusinessInfo_Revenue" Association="Self.FK_TCBusinessInfo_Revenue">
+            <End Role="Revenue" EntitySet="Revenue" />
+            <End Role="TCBusinessInfo" EntitySet="TCBusinessInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBusinessInfo_TCBasicInfo" Association="Self.FK_TCBusinessInfo_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCBusinessInfo" EntitySet="TCBusinessInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCContact_TCBasicInfo" Association="Self.FK_TCContact_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCContact" EntitySet="TCContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCGeneral_TCBasicInfo" Association="Self.FK_TCGeneral_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCGeneral" EntitySet="TCGeneral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCIdealPartner_TCBasicInfo" Association="Self.FK_TCIdealPartner_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCIdealPartner" EntitySet="TCIdealPartner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCRating_TCBasicInfo" Association="Self.FK_TCRating_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCRating" EntitySet="TCRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCTechnology_TCBasicInfo" Association="Self.FK_TCTechnology_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCTechnology" EntitySet="TCTechnology" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCTechnology_TechSector" Association="Self.FK_TCTechnology_TechSector">
+            <End Role="TechSector" EntitySet="TechSector" />
+            <End Role="TCTechnology" EntitySet="TCTechnology" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechDomainToTC_TCBasicInfo" Association="Self.FK_TechDomainToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TechDomainToTC" EntitySet="TechDomainToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechDomainToTC_TechDomain" Association="Self.FK_TechDomainToTC_TechDomain">
+            <End Role="TechDomain" EntitySet="TechDomain" />
+            <End Role="TechDomainToTC" EntitySet="TechDomainToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechTagParents_TechTag" Association="Self.FK_TechTagParents_TechTag">
+            <End Role="TechTag" EntitySet="TechTag" />
+            <End Role="TechTagParents" EntitySet="TechTagParents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechTagParents_TechTag_Parent" Association="Self.FK_TechTagParents_TechTag_Parent">
+            <End Role="TechTag" EntitySet="TechTag" />
+            <End Role="TechTagParents" EntitySet="TechTagParents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechTagToTC_TCBasicInfo" Association="Self.FK_TechTagToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TechTagToTC" EntitySet="TechTagToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechTagToTC_TechTag" Association="Self.FK_TechTagToTC_TechTag">
+            <End Role="TechTag" EntitySet="TechTag" />
+            <End Role="TechTagToTC" EntitySet="TechTagToTC" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InnosixModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountManagerName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TCAdmin" Relationship="Self.FK_TCAdmin_AccountManager" FromRole="AccountManager" ToRole="TCAdmin" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetUsersTcClaim" Relationship="Self.FK_AspNetUsersTcClaim_AspNetUsers" FromRole="AspNetUsers" ToRole="AspNetUsersTcClaim" />
+          <NavigationProperty Name="AspNetUsersToPortfolio" Relationship="Self.FK_AspNetUsersToPortfolio_AspNetUsers" FromRole="AspNetUsers" ToRole="AspNetUsersToPortfolio" />
+          <NavigationProperty Name="AspNetUsersToStage" Relationship="Self.FK_AspNetUsersToStage_AspNetUsers" FromRole="AspNetUsers" ToRole="AspNetUsersToStage" />
+          <NavigationProperty Name="AspNetUsersToTC" Relationship="Self.FK_AspNetUsersToTC_AspNetUsers" FromRole="AspNetUsers" ToRole="AspNetUsersToTC" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="AspNetUsersTcClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="AspNetUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsersTcClaim_AspNetUsers" FromRole="AspNetUsersTcClaim" ToRole="AspNetUsers" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_AspNetUsersTcClaim_TCBasicInfo" FromRole="AspNetUsersTcClaim" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="AspNetUsersToPortfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PortfolioId" Type="Int64" Nullable="false" />
+          <Property Name="AspNetUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsersToPortfolio_AspNetUsers" FromRole="AspNetUsersToPortfolio" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Portfolio" Relationship="Self.FK_AspNetUsersToPortfolio_Portfolio" FromRole="AspNetUsersToPortfolio" ToRole="Portfolio" />
+        </EntityType>
+        <EntityType Name="AspNetUsersToStage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsersToStage_AspNetUsers" FromRole="AspNetUsersToStage" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Stage" Relationship="Self.FK_AspNetUsersToStage_Stage" FromRole="AspNetUsersToStage" ToRole="Stage" />
+        </EntityType>
+        <EntityType Name="AspNetUsersToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="AspNetUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsersToTC_AspNetUsers" FromRole="AspNetUsersToTC" ToRole="AspNetUsers" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_AspNetUsersToTC_TCBasicInfo" FromRole="AspNetUsersToTC" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="BusinessModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessModelName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BusinessModelToTC" Relationship="Self.FK_BusinessModelToTC_BusinessModel" FromRole="BusinessModel" ToRole="BusinessModelToTC" />
+        </EntityType>
+        <EntityType Name="BusinessModelToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="BusinessModelId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BusinessModel" Relationship="Self.FK_BusinessModelToTC_BusinessModel" FromRole="BusinessModelToTC" ToRole="BusinessModel" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_BusinessModelToTC_TCBasicInfo" FromRole="BusinessModelToTC" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="Cluster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClusterName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TCAdmin" Relationship="Self.FK_TCAdmin_Cluster" FromRole="Cluster" ToRole="TCAdmin" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_TCBasicInfo_Country" FromRole="Country" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeTypeName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TCBusinessInfo" Relationship="Self.FK_TCBusinessInfo_Employees" FromRole="Employees" ToRole="TCBusinessInfo" />
+        </EntityType>
+        <EntityType Name="Maturity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaturityStageName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TCBusinessInfo" Relationship="Self.FK_TCBusinessInfo_Maturity" FromRole="Maturity" ToRole="TCBusinessInfo" />
+        </EntityType>
+        <EntityType Name="Nace">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NACEcode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TCBusinessInfo" Relationship="Self.FK_TCBusinessInfo_Nace" FromRole="Nace" ToRole="TCBusinessInfo" />
+        </EntityType>
+        <EntityType Name="Portfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NrOfTCs" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsersToPortfolio" Relationship="Self.FK_AspNetUsersToPortfolio_Portfolio" FromRole="Portfolio" ToRole="AspNetUsersToPortfolio" />
+          <NavigationProperty Name="PortfolioToPortfolioItem" Relationship="Self.FK_PortfolioToPortfolioItem_Portfolio" FromRole="Portfolio" ToRole="PortfolioToPortfolioItem" />
+        </EntityType>
+        <EntityType Name="PortfolioItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="StageId" Type="Int32" />
+          <Property Name="NextMoveId" Type="Int32" />
+          <Property Name="NextMoveDate" Type="DateTime" Precision="0" />
+          <Property Name="ResponsibleEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ResponsibleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OpportunityDate" Type="DateTime" Precision="0" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Stage" Relationship="Self.FK_PorftolioItem_Stage" FromRole="PortfolioItem" ToRole="Stage" />
+          <NavigationProperty Name="Stage1" Relationship="Self.FK_PorftolioItem_Stage1" FromRole="PortfolioItem" ToRole="Stage" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_PorftolioItem_TCBasicInfo" FromRole="PortfolioItem" ToRole="TCBasicInfo" />
+          <NavigationProperty Name="PortfolioToPortfolioItem" Relationship="Self.FK_PortfolioToPortfolioItem_PortfolioItem" FromRole="PortfolioItem" ToRole="PortfolioToPortfolioItem" />
+        </EntityType>
+        <EntityType Name="PortfolioToPortfolioItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PortfolioId" Type="Int64" Nullable="false" />
+          <Property Name="PortfolioItemId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Portfolio" Relationship="Self.FK_PortfolioToPortfolioItem_Portfolio" FromRole="PortfolioToPortfolioItem" ToRole="Portfolio" />
+          <NavigationProperty Name="PortfolioItem" Relationship="Self.FK_PortfolioToPortfolioItem_PortfolioItem" FromRole="PortfolioToPortfolioItem" ToRole="PortfolioItem" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductDescription" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductToTC" Relationship="Self.FK_ProductToTC_Product" FromRole="Product" ToRole="ProductToTC" />
+        </EntityType>
+        <EntityType Name="ProductToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="ProductId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductToTC_Product" FromRole="ProductToTC" ToRole="Product" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_ProductToTC_TCBasicInfo" FromRole="ProductToTC" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="Revenue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RevenueName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TCBusinessInfo" Relationship="Self.FK_TCBusinessInfo_Revenue" FromRole="Revenue" ToRole="TCBusinessInfo" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServicesName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServicesToTC" Relationship="Self.FK_ServicesToTC_Services" FromRole="Services" ToRole="ServicesToTC" />
+        </EntityType>
+        <EntityType Name="ServicesToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="ServicesId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Services" Relationship="Self.FK_ServicesToTC_Services" FromRole="ServicesToTC" ToRole="Services" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_ServicesToTC_TCBasicInfo" FromRole="ServicesToTC" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsersToStage" Relationship="Self.FK_AspNetUsersToStage_Stage" FromRole="Stage" ToRole="AspNetUsersToStage" />
+          <NavigationProperty Name="PortfolioItem" Relationship="Self.FK_PorftolioItem_Stage" FromRole="Stage" ToRole="PortfolioItem" />
+          <NavigationProperty Name="PortfolioItem1" Relationship="Self.FK_PorftolioItem_Stage1" FromRole="Stage" ToRole="PortfolioItem" />
+        </EntityType>
+        <EntityType Name="TCActive">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_TCActive_TCBasicInfo" FromRole="TCActive" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="TCAdmin">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="ClusterRelationId" Type="Int32" />
+          <Property Name="FreetextNoteField" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="InnosixAccountManagerId" Type="Int32" />
+          <Property Name="Source" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccountManager" Relationship="Self.FK_TCAdmin_AccountManager" FromRole="TCAdmin" ToRole="AccountManager" />
+          <NavigationProperty Name="Cluster" Relationship="Self.FK_TCAdmin_Cluster" FromRole="TCAdmin" ToRole="Cluster" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_TCAdmin_TCBasicInfo" FromRole="TCAdmin" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="TCBasicInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyPhone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LegalSuffix" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyWebsite" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsersTcClaim" Relationship="Self.FK_AspNetUsersTcClaim_TCBasicInfo" FromRole="TCBasicInfo" ToRole="AspNetUsersTcClaim" />
+          <NavigationProperty Name="AspNetUsersToTC" Relationship="Self.FK_AspNetUsersToTC_TCBasicInfo" FromRole="TCBasicInfo" ToRole="AspNetUsersToTC" />
+          <NavigationProperty Name="BusinessModelToTC" Relationship="Self.FK_BusinessModelToTC_TCBasicInfo" FromRole="TCBasicInfo" ToRole="BusinessModelToTC" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_TCBasicInfo_Country" FromRole="TCBasicInfo" ToRole="Country" />
+          <NavigationProperty Name="PortfolioItem" Relationship="Self.FK_PorftolioItem_TCBasicInfo" FromRole="TCBasicInfo" ToRole="PortfolioItem" />
+          <NavigationProperty Name="ProductToTC" Relationship="Self.FK_ProductToTC_TCBasicInfo" FromRole="TCBasicInfo" ToRole="ProductToTC" />
+          <NavigationProperty Name="ServicesToTC" Relationship="Self.FK_ServicesToTC_TCBasicInfo" FromRole="TCBasicInfo" ToRole="ServicesToTC" />
+          <NavigationProperty Name="TCActive" Relationship="Self.FK_TCActive_TCBasicInfo" FromRole="TCBasicInfo" ToRole="TCActive" />
+          <NavigationProperty Name="TCAdmin" Relationship="Self.FK_TCAdmin_TCBasicInfo" FromRole="TCBasicInfo" ToRole="TCAdmin" />
+          <NavigationProperty Name="TCBusinessInfo" Relationship="Self.FK_TCBusinessInfo_TCBasicInfo" FromRole="TCBasicInfo" ToRole="TCBusinessInfo" />
+          <NavigationProperty Name="TCContact" Relationship="Self.FK_TCContact_TCBasicInfo" FromRole="TCBasicInfo" ToRole="TCContact" />
+          <NavigationProperty Name="TCGeneral" Relationship="Self.FK_TCGeneral_TCBasicInfo" FromRole="TCBasicInfo" ToRole="TCGeneral" />
+          <NavigationProperty Name="TCIdealPartner" Relationship="Self.FK_TCIdealPartner_TCBasicInfo" FromRole="TCBasicInfo" ToRole="TCIdealPartner" />
+          <NavigationProperty Name="TCRating" Relationship="Self.FK_TCRating_TCBasicInfo" FromRole="TCBasicInfo" ToRole="TCRating" />
+          <NavigationProperty Name="TCTechnology" Relationship="Self.FK_TCTechnology_TCBasicInfo" FromRole="TCBasicInfo" ToRole="TCTechnology" />
+          <NavigationProperty Name="TechDomainToTC" Relationship="Self.FK_TechDomainToTC_TCBasicInfo" FromRole="TCBasicInfo" ToRole="TechDomainToTC" />
+          <NavigationProperty Name="TechTagToTC" Relationship="Self.FK_TechTagToTC_TCBasicInfo" FromRole="TCBasicInfo" ToRole="TechTagToTC" />
+        </EntityType>
+        <EntityType Name="TCBusinessInfo">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="BusinessSummary" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyDescription" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="NaceCodeId" Type="Int32" />
+          <Property Name="RevenueYear" Type="Int32" />
+          <Property Name="FullTimeEmployeesId" Type="Int32" />
+          <Property Name="FTEyear" Type="Int32" />
+          <Property Name="KeyCompetitors" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="KeyPartners" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LargestOwners" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MaturityStageId" Type="Int32" />
+          <Property Name="ProfitMaking" Type="Boolean" Nullable="false" />
+          <Property Name="RevenueId" Type="Int32" />
+          <Property Name="Established" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_TCBusinessInfo_Employees" FromRole="TCBusinessInfo" ToRole="Employees" />
+          <NavigationProperty Name="Maturity" Relationship="Self.FK_TCBusinessInfo_Maturity" FromRole="TCBusinessInfo" ToRole="Maturity" />
+          <NavigationProperty Name="Nace" Relationship="Self.FK_TCBusinessInfo_Nace" FromRole="TCBusinessInfo" ToRole="Nace" />
+          <NavigationProperty Name="Revenue" Relationship="Self.FK_TCBusinessInfo_Revenue" FromRole="TCBusinessInfo" ToRole="Revenue" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_TCBusinessInfo_TCBasicInfo" FromRole="TCBusinessInfo" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="TCContact">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="ContactPersonEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactPersonPhone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactPersonName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_TCContact_TCBasicInfo" FromRole="TCContact" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="TCGeneral">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_TCGeneral_TCBasicInfo" FromRole="TCGeneral" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="TCIdealPartner">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="IdealCorporatePartnerNace" Type="Int32" />
+          <Property Name="IdealCorporatePartnerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdealCorporatePartnerTechnologyFocus" Type="Int32" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_TCIdealPartner_TCBasicInfo" FromRole="TCIdealPartner" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="TCRating">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="Financials" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="Fundamentals" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="Market" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="ManagementAndExecution" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="BML" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="BMLConfidenceIndex" Type="Int32" Nullable="false" />
+          <Property Name="IntellectualProperty" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="Technology" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="TechnologyRisk" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="TML" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="TMLConfidenceIndex" Type="Int32" Nullable="false" />
+          <Property Name="OverallRating" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="OverallRatingConfidenceIndex" Type="Int32" Nullable="false" />
+          <Property Name="RatingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_TCRating_TCBasicInfo" FromRole="TCRating" ToRole="TCBasicInfo" />
+        </EntityType>
+        <EntityType Name="TCTechnology">
+          <Key>
+            <PropertyRef Name="TCid" />
+          </Key>
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="AdditionalTechTags" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Patents" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OtherIpNotPatented" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TechnologySectorId" Type="Int32" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_TCTechnology_TCBasicInfo" FromRole="TCTechnology" ToRole="TCBasicInfo" />
+          <NavigationProperty Name="TechSector" Relationship="Self.FK_TCTechnology_TechSector" FromRole="TCTechnology" ToRole="TechSector" />
+        </EntityType>
+        <EntityType Name="TechDomain">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DomainName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TechDomainToTC" Relationship="Self.FK_TechDomainToTC_TechDomain" FromRole="TechDomain" ToRole="TechDomainToTC" />
+        </EntityType>
+        <EntityType Name="TechDomainToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="TechDomainId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_TechDomainToTC_TCBasicInfo" FromRole="TechDomainToTC" ToRole="TCBasicInfo" />
+          <NavigationProperty Name="TechDomain" Relationship="Self.FK_TechDomainToTC_TechDomain" FromRole="TechDomainToTC" ToRole="TechDomain" />
+        </EntityType>
+        <EntityType Name="TechSector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TechSectorName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TCTechnology" Relationship="Self.FK_TCTechnology_TechSector" FromRole="TechSector" ToRole="TCTechnology" />
+        </EntityType>
+        <EntityType Name="TechTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentsCount" Type="Int32" />
+          <Property Name="ChildrenCount" Type="Int32" />
+          <Property Name="UsageCount" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TechTagParents" Relationship="Self.FK_TechTagParents_TechTag" FromRole="TechTag" ToRole="TechTagParents" />
+          <NavigationProperty Name="TechTagParents1" Relationship="Self.FK_TechTagParents_TechTag_Parent" FromRole="TechTag" ToRole="TechTagParents" />
+          <NavigationProperty Name="TechTagToTC" Relationship="Self.FK_TechTagToTC_TechTag" FromRole="TechTag" ToRole="TechTagToTC" />
+        </EntityType>
+        <EntityType Name="TechTagDeclined">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TechTagParents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TechTagId" Type="Int32" Nullable="false" />
+          <Property Name="ParentTechTagId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TechTag" Relationship="Self.FK_TechTagParents_TechTag" FromRole="TechTagParents" ToRole="TechTag" />
+          <NavigationProperty Name="TechTag1" Relationship="Self.FK_TechTagParents_TechTag_Parent" FromRole="TechTagParents" ToRole="TechTag" />
+        </EntityType>
+        <EntityType Name="TechTagToTC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCid" Type="Int64" Nullable="false" />
+          <Property Name="TechTagId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TCBasicInfo" Relationship="Self.FK_TechTagToTC_TCBasicInfo" FromRole="TechTagToTC" ToRole="TCBasicInfo" />
+          <NavigationProperty Name="TechTag" Relationship="Self.FK_TechTagToTC_TechTag" FromRole="TechTagToTC" ToRole="TechTag" />
+        </EntityType>
+        <EntityType Name="VTcClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="CompanyEmail" />
+            <PropertyRef Name="CompanyWebsite" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LegalSuffix" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyWebsite" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TechTags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VTcWithTags">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="CompanyEmail" />
+            <PropertyRef Name="CompanyWebsite" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LegalSuffix" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyWebsite" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="TechTags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VTcWithTagsUser">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="CompanyEmail" />
+            <PropertyRef Name="CompanyWebsite" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LegalSuffix" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyWebsite" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TechTags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VUserTcClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="PhoneNumber" />
+            <PropertyRef Name="TcId" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="CountryName" />
+            <PropertyRef Name="CompanyEmail" />
+            <PropertyRef Name="CompanyWebsite" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TcId" Type="Int64" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CountryName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LegalSuffix" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyWebsite" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TCAdmin_AccountManager">
+          <End Role="AccountManager" Type="Self.AccountManager" Multiplicity="0..1" />
+          <End Role="TCAdmin" Type="Self.TCAdmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountManager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCAdmin">
+              <PropertyRef Name="InnosixAccountManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersTcClaim_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersTcClaim" Type="Self.AspNetUsersTcClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersTcClaim">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToPortfolio_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersToPortfolio" Type="Self.AspNetUsersToPortfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToPortfolio">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToStage_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersToStage" Type="Self.AspNetUsersToStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToStage">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToTC_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersToTC" Type="Self.AspNetUsersToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToTC">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersTcClaim_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="AspNetUsersTcClaim" Type="Self.AspNetUsersTcClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersTcClaim">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToPortfolio_Portfolio">
+          <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="1" />
+          <End Role="AspNetUsersToPortfolio" Type="Self.AspNetUsersToPortfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Portfolio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToPortfolio">
+              <PropertyRef Name="PortfolioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToStage_Stage">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="1" />
+          <End Role="AspNetUsersToStage" Type="Self.AspNetUsersToStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToStage">
+              <PropertyRef Name="StageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="AspNetUsersToTC" Type="Self.AspNetUsersToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusinessModelToTC_BusinessModel">
+          <End Role="BusinessModel" Type="Self.BusinessModel" Multiplicity="1" />
+          <End Role="BusinessModelToTC" Type="Self.BusinessModelToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessModelToTC">
+              <PropertyRef Name="BusinessModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusinessModelToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="BusinessModelToTC" Type="Self.BusinessModelToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessModelToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCAdmin_Cluster">
+          <End Role="Cluster" Type="Self.Cluster" Multiplicity="0..1" />
+          <End Role="TCAdmin" Type="Self.TCAdmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cluster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCAdmin">
+              <PropertyRef Name="ClusterRelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBasicInfo_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBasicInfo">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBusinessInfo_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="TCBusinessInfo" Type="Self.TCBusinessInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBusinessInfo">
+              <PropertyRef Name="FullTimeEmployeesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBusinessInfo_Maturity">
+          <End Role="Maturity" Type="Self.Maturity" Multiplicity="0..1" />
+          <End Role="TCBusinessInfo" Type="Self.TCBusinessInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maturity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBusinessInfo">
+              <PropertyRef Name="MaturityStageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBusinessInfo_Nace">
+          <End Role="Nace" Type="Self.Nace" Multiplicity="0..1" />
+          <End Role="TCBusinessInfo" Type="Self.TCBusinessInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nace">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBusinessInfo">
+              <PropertyRef Name="NaceCodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PortfolioToPortfolioItem_Portfolio">
+          <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="1" />
+          <End Role="PortfolioToPortfolioItem" Type="Self.PortfolioToPortfolioItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Portfolio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PortfolioToPortfolioItem">
+              <PropertyRef Name="PortfolioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PorftolioItem_Stage">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
+          <End Role="PortfolioItem" Type="Self.PortfolioItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PortfolioItem">
+              <PropertyRef Name="StageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PorftolioItem_Stage1">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
+          <End Role="PortfolioItem" Type="Self.PortfolioItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PortfolioItem">
+              <PropertyRef Name="NextMoveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PorftolioItem_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="PortfolioItem" Type="Self.PortfolioItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PortfolioItem">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PortfolioToPortfolioItem_PortfolioItem">
+          <End Role="PortfolioItem" Type="Self.PortfolioItem" Multiplicity="1" />
+          <End Role="PortfolioToPortfolioItem" Type="Self.PortfolioToPortfolioItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PortfolioItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PortfolioToPortfolioItem">
+              <PropertyRef Name="PortfolioItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductToTC_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductToTC" Type="Self.ProductToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductToTC">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="ProductToTC" Type="Self.ProductToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBusinessInfo_Revenue">
+          <End Role="Revenue" Type="Self.Revenue" Multiplicity="0..1" />
+          <End Role="TCBusinessInfo" Type="Self.TCBusinessInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Revenue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBusinessInfo">
+              <PropertyRef Name="RevenueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicesToTC_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="ServicesToTC" Type="Self.ServicesToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServicesToTC">
+              <PropertyRef Name="ServicesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicesToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="ServicesToTC" Type="Self.ServicesToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServicesToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCActive_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCActive" Type="Self.TCActive" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCActive">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCAdmin_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCAdmin" Type="Self.TCAdmin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCAdmin">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCBusinessInfo_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCBusinessInfo" Type="Self.TCBusinessInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCBusinessInfo">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCContact_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCContact" Type="Self.TCContact" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCContact">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCGeneral_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCGeneral" Type="Self.TCGeneral" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCGeneral">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCIdealPartner_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCIdealPartner" Type="Self.TCIdealPartner" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCIdealPartner">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCRating_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCRating" Type="Self.TCRating" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCRating">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCTechnology_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TCTechnology" Type="Self.TCTechnology" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCTechnology">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechDomainToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TechDomainToTC" Type="Self.TechDomainToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechDomainToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechTagToTC_TCBasicInfo">
+          <End Role="TCBasicInfo" Type="Self.TCBasicInfo" Multiplicity="1" />
+          <End Role="TechTagToTC" Type="Self.TechTagToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCBasicInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechTagToTC">
+              <PropertyRef Name="TCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCTechnology_TechSector">
+          <End Role="TechSector" Type="Self.TechSector" Multiplicity="0..1" />
+          <End Role="TCTechnology" Type="Self.TCTechnology" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TechSector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TCTechnology">
+              <PropertyRef Name="TechnologySectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechDomainToTC_TechDomain">
+          <End Role="TechDomain" Type="Self.TechDomain" Multiplicity="1" />
+          <End Role="TechDomainToTC" Type="Self.TechDomainToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TechDomain">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechDomainToTC">
+              <PropertyRef Name="TechDomainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechTagParents_TechTag">
+          <End Role="TechTag" Type="Self.TechTag" Multiplicity="1" />
+          <End Role="TechTagParents" Type="Self.TechTagParents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TechTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechTagParents">
+              <PropertyRef Name="TechTagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechTagParents_TechTag_Parent">
+          <End Role="TechTag" Type="Self.TechTag" Multiplicity="1" />
+          <End Role="TechTagParents" Type="Self.TechTagParents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TechTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechTagParents">
+              <PropertyRef Name="ParentTechTagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechTagToTC_TechTag">
+          <End Role="TechTag" Type="Self.TechTag" Multiplicity="1" />
+          <End Role="TechTagToTC" Type="Self.TechTagToTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TechTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechTagToTC">
+              <PropertyRef Name="TechTagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="InnosixEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountManager" EntityType="Self.AccountManager" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="AspNetUsersTcClaim" EntityType="Self.AspNetUsersTcClaim" />
+          <EntitySet Name="AspNetUsersToPortfolio" EntityType="Self.AspNetUsersToPortfolio" />
+          <EntitySet Name="AspNetUsersToStage" EntityType="Self.AspNetUsersToStage" />
+          <EntitySet Name="AspNetUsersToTC" EntityType="Self.AspNetUsersToTC" />
+          <EntitySet Name="BusinessModel" EntityType="Self.BusinessModel" />
+          <EntitySet Name="BusinessModelToTC" EntityType="Self.BusinessModelToTC" />
+          <EntitySet Name="Cluster" EntityType="Self.Cluster" />
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Maturity" EntityType="Self.Maturity" />
+          <EntitySet Name="Nace" EntityType="Self.Nace" />
+          <EntitySet Name="Portfolio" EntityType="Self.Portfolio" />
+          <EntitySet Name="PortfolioItem" EntityType="Self.PortfolioItem" />
+          <EntitySet Name="PortfolioToPortfolioItem" EntityType="Self.PortfolioToPortfolioItem" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="ProductToTC" EntityType="Self.ProductToTC" />
+          <EntitySet Name="Revenue" EntityType="Self.Revenue" />
+          <EntitySet Name="Services" EntityType="Self.Services" />
+          <EntitySet Name="ServicesToTC" EntityType="Self.ServicesToTC" />
+          <EntitySet Name="Stage" EntityType="Self.Stage" />
+          <EntitySet Name="TCActive" EntityType="Self.TCActive" />
+          <EntitySet Name="TCAdmin" EntityType="Self.TCAdmin" />
+          <EntitySet Name="TCBasicInfo" EntityType="Self.TCBasicInfo" />
+          <EntitySet Name="TCBusinessInfo" EntityType="Self.TCBusinessInfo" />
+          <EntitySet Name="TCContact" EntityType="Self.TCContact" />
+          <EntitySet Name="TCGeneral" EntityType="Self.TCGeneral" />
+          <EntitySet Name="TCIdealPartner" EntityType="Self.TCIdealPartner" />
+          <EntitySet Name="TCRating" EntityType="Self.TCRating" />
+          <EntitySet Name="TCTechnology" EntityType="Self.TCTechnology" />
+          <EntitySet Name="TechDomain" EntityType="Self.TechDomain" />
+          <EntitySet Name="TechDomainToTC" EntityType="Self.TechDomainToTC" />
+          <EntitySet Name="TechSector" EntityType="Self.TechSector" />
+          <EntitySet Name="TechTag" EntityType="Self.TechTag" />
+          <EntitySet Name="TechTagDeclined" EntityType="Self.TechTagDeclined" />
+          <EntitySet Name="TechTagParents" EntityType="Self.TechTagParents" />
+          <EntitySet Name="TechTagToTC" EntityType="Self.TechTagToTC" />
+          <EntitySet Name="VTcClaim" EntityType="Self.VTcClaim" />
+          <EntitySet Name="VTcWithTags" EntityType="Self.VTcWithTags" />
+          <EntitySet Name="VTcWithTagsUser" EntityType="Self.VTcWithTagsUser" />
+          <EntitySet Name="VUserTcClaim" EntityType="Self.VUserTcClaim" />
+          <AssociationSet Name="FK_TCAdmin_AccountManager" Association="Self.FK_TCAdmin_AccountManager">
+            <End Role="AccountManager" EntitySet="AccountManager" />
+            <End Role="TCAdmin" EntitySet="TCAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersTcClaim_AspNetUsers" Association="Self.FK_AspNetUsersTcClaim_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersTcClaim" EntitySet="AspNetUsersTcClaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToPortfolio_AspNetUsers" Association="Self.FK_AspNetUsersToPortfolio_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersToPortfolio" EntitySet="AspNetUsersToPortfolio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToStage_AspNetUsers" Association="Self.FK_AspNetUsersToStage_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersToStage" EntitySet="AspNetUsersToStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToTC_AspNetUsers" Association="Self.FK_AspNetUsersToTC_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersToTC" EntitySet="AspNetUsersToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersTcClaim_TCBasicInfo" Association="Self.FK_AspNetUsersTcClaim_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="AspNetUsersTcClaim" EntitySet="AspNetUsersTcClaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToPortfolio_Portfolio" Association="Self.FK_AspNetUsersToPortfolio_Portfolio">
+            <End Role="Portfolio" EntitySet="Portfolio" />
+            <End Role="AspNetUsersToPortfolio" EntitySet="AspNetUsersToPortfolio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToStage_Stage" Association="Self.FK_AspNetUsersToStage_Stage">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="AspNetUsersToStage" EntitySet="AspNetUsersToStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersToTC_TCBasicInfo" Association="Self.FK_AspNetUsersToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="AspNetUsersToTC" EntitySet="AspNetUsersToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusinessModelToTC_BusinessModel" Association="Self.FK_BusinessModelToTC_BusinessModel">
+            <End Role="BusinessModel" EntitySet="BusinessModel" />
+            <End Role="BusinessModelToTC" EntitySet="BusinessModelToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusinessModelToTC_TCBasicInfo" Association="Self.FK_BusinessModelToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="BusinessModelToTC" EntitySet="BusinessModelToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCAdmin_Cluster" Association="Self.FK_TCAdmin_Cluster">
+            <End Role="Cluster" EntitySet="Cluster" />
+            <End Role="TCAdmin" EntitySet="TCAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBasicInfo_Country" Association="Self.FK_TCBasicInfo_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBusinessInfo_Employees" Association="Self.FK_TCBusinessInfo_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="TCBusinessInfo" EntitySet="TCBusinessInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBusinessInfo_Maturity" Association="Self.FK_TCBusinessInfo_Maturity">
+            <End Role="Maturity" EntitySet="Maturity" />
+            <End Role="TCBusinessInfo" EntitySet="TCBusinessInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBusinessInfo_Nace" Association="Self.FK_TCBusinessInfo_Nace">
+            <End Role="Nace" EntitySet="Nace" />
+            <End Role="TCBusinessInfo" EntitySet="TCBusinessInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PortfolioToPortfolioItem_Portfolio" Association="Self.FK_PortfolioToPortfolioItem_Portfolio">
+            <End Role="Portfolio" EntitySet="Portfolio" />
+            <End Role="PortfolioToPortfolioItem" EntitySet="PortfolioToPortfolioItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PorftolioItem_Stage" Association="Self.FK_PorftolioItem_Stage">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="PortfolioItem" EntitySet="PortfolioItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PorftolioItem_Stage1" Association="Self.FK_PorftolioItem_Stage1">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="PortfolioItem" EntitySet="PortfolioItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PorftolioItem_TCBasicInfo" Association="Self.FK_PorftolioItem_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="PortfolioItem" EntitySet="PortfolioItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PortfolioToPortfolioItem_PortfolioItem" Association="Self.FK_PortfolioToPortfolioItem_PortfolioItem">
+            <End Role="PortfolioItem" EntitySet="PortfolioItem" />
+            <End Role="PortfolioToPortfolioItem" EntitySet="PortfolioToPortfolioItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductToTC_Product" Association="Self.FK_ProductToTC_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductToTC" EntitySet="ProductToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductToTC_TCBasicInfo" Association="Self.FK_ProductToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="ProductToTC" EntitySet="ProductToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBusinessInfo_Revenue" Association="Self.FK_TCBusinessInfo_Revenue">
+            <End Role="Revenue" EntitySet="Revenue" />
+            <End Role="TCBusinessInfo" EntitySet="TCBusinessInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicesToTC_Services" Association="Self.FK_ServicesToTC_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="ServicesToTC" EntitySet="ServicesToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicesToTC_TCBasicInfo" Association="Self.FK_ServicesToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="ServicesToTC" EntitySet="ServicesToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCActive_TCBasicInfo" Association="Self.FK_TCActive_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCActive" EntitySet="TCActive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCAdmin_TCBasicInfo" Association="Self.FK_TCAdmin_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCAdmin" EntitySet="TCAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCBusinessInfo_TCBasicInfo" Association="Self.FK_TCBusinessInfo_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCBusinessInfo" EntitySet="TCBusinessInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCContact_TCBasicInfo" Association="Self.FK_TCContact_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCContact" EntitySet="TCContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCGeneral_TCBasicInfo" Association="Self.FK_TCGeneral_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCGeneral" EntitySet="TCGeneral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCIdealPartner_TCBasicInfo" Association="Self.FK_TCIdealPartner_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCIdealPartner" EntitySet="TCIdealPartner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCRating_TCBasicInfo" Association="Self.FK_TCRating_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCRating" EntitySet="TCRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCTechnology_TCBasicInfo" Association="Self.FK_TCTechnology_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TCTechnology" EntitySet="TCTechnology" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechDomainToTC_TCBasicInfo" Association="Self.FK_TechDomainToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TechDomainToTC" EntitySet="TechDomainToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechTagToTC_TCBasicInfo" Association="Self.FK_TechTagToTC_TCBasicInfo">
+            <End Role="TCBasicInfo" EntitySet="TCBasicInfo" />
+            <End Role="TechTagToTC" EntitySet="TechTagToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCTechnology_TechSector" Association="Self.FK_TCTechnology_TechSector">
+            <End Role="TechSector" EntitySet="TechSector" />
+            <End Role="TCTechnology" EntitySet="TCTechnology" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechDomainToTC_TechDomain" Association="Self.FK_TechDomainToTC_TechDomain">
+            <End Role="TechDomain" EntitySet="TechDomain" />
+            <End Role="TechDomainToTC" EntitySet="TechDomainToTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechTagParents_TechTag" Association="Self.FK_TechTagParents_TechTag">
+            <End Role="TechTag" EntitySet="TechTag" />
+            <End Role="TechTagParents" EntitySet="TechTagParents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechTagParents_TechTag_Parent" Association="Self.FK_TechTagParents_TechTag_Parent">
+            <End Role="TechTag" EntitySet="TechTag" />
+            <End Role="TechTagParents" EntitySet="TechTagParents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechTagToTC_TechTag" Association="Self.FK_TechTagToTC_TechTag">
+            <End Role="TechTag" EntitySet="TechTag" />
+            <End Role="TechTagToTC" EntitySet="TechTagToTC" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <FunctionImport Name="GetAdditionalTechTags" ReturnType="Collection(InnosixModel.GetAdditionalTechTags_Result)" />
+          <FunctionImport Name="GetTagHierarchy" ReturnType="Collection(InnosixModel.GetTagHierarchy_Result)" />
+        </EntityContainer>
+        <ComplexType Name="GetAdditionalTechTags_Result">
+          <Property Type="Int64" Name="TCid" Nullable="false" />
+          <Property Type="String" Name="AdditionalTechTags" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetTagHierarchy_Result">
+          <Property Type="Int32" Name="TagId" Nullable="true" />
+          <Property Type="String" Name="Node" Nullable="true" />
+          <Property Type="Int32" Name="Level" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InnosixModelStoreContainer" CdmEntityContainer="InnosixEntities">
+          <EntitySetMapping Name="AccountManager">
+            <EntityTypeMapping TypeName="InnosixModel.AccountManager">
+              <MappingFragment StoreEntitySet="AccountManager">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountManagerName" ColumnName="AccountManagerName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="InnosixModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="InnosixModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="InnosixModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="InnosixModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersTcClaim">
+            <EntityTypeMapping TypeName="InnosixModel.AspNetUsersTcClaim">
+              <MappingFragment StoreEntitySet="AspNetUsersTcClaim">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersToPortfolio">
+            <EntityTypeMapping TypeName="InnosixModel.AspNetUsersToPortfolio">
+              <MappingFragment StoreEntitySet="AspNetUsersToPortfolio">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PortfolioId" ColumnName="PortfolioId" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersToStage">
+            <EntityTypeMapping TypeName="InnosixModel.AspNetUsersToStage">
+              <MappingFragment StoreEntitySet="AspNetUsersToStage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="StageId" ColumnName="StageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersToTC">
+            <EntityTypeMapping TypeName="InnosixModel.AspNetUsersToTC">
+              <MappingFragment StoreEntitySet="AspNetUsersToTC">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusinessModel">
+            <EntityTypeMapping TypeName="InnosixModel.BusinessModel">
+              <MappingFragment StoreEntitySet="BusinessModel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BusinessModelName" ColumnName="BusinessModelName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusinessModelToTC">
+            <EntityTypeMapping TypeName="InnosixModel.BusinessModelToTC">
+              <MappingFragment StoreEntitySet="BusinessModelToTC">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="BusinessModelId" ColumnName="BusinessModelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cluster">
+            <EntityTypeMapping TypeName="InnosixModel.Cluster">
+              <MappingFragment StoreEntitySet="Cluster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClusterName" ColumnName="ClusterName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="InnosixModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="InnosixModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeTypeName" ColumnName="EmployeeTypeName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maturity">
+            <EntityTypeMapping TypeName="InnosixModel.Maturity">
+              <MappingFragment StoreEntitySet="Maturity">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaturityStageName" ColumnName="MaturityStageName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nace">
+            <EntityTypeMapping TypeName="InnosixModel.Nace">
+              <MappingFragment StoreEntitySet="Nace">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NACEcode" ColumnName="NACEcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Portfolio">
+            <EntityTypeMapping TypeName="InnosixModel.Portfolio">
+              <MappingFragment StoreEntitySet="Portfolio">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NrOfTCs" ColumnName="NrOfTCs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortfolioItem">
+            <EntityTypeMapping TypeName="InnosixModel.PortfolioItem">
+              <MappingFragment StoreEntitySet="PortfolioItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="StageId" ColumnName="StageId" />
+                <ScalarProperty Name="NextMoveId" ColumnName="NextMoveId" />
+                <ScalarProperty Name="NextMoveDate" ColumnName="NextMoveDate" />
+                <ScalarProperty Name="ResponsibleEmail" ColumnName="ResponsibleEmail" />
+                <ScalarProperty Name="ResponsibleName" ColumnName="ResponsibleName" />
+                <ScalarProperty Name="OpportunityDate" ColumnName="OpportunityDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortfolioToPortfolioItem">
+            <EntityTypeMapping TypeName="InnosixModel.PortfolioToPortfolioItem">
+              <MappingFragment StoreEntitySet="PortfolioToPortfolioItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PortfolioId" ColumnName="PortfolioId" />
+                <ScalarProperty Name="PortfolioItemId" ColumnName="PortfolioItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="InnosixModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductToTC">
+            <EntityTypeMapping TypeName="InnosixModel.ProductToTC">
+              <MappingFragment StoreEntitySet="ProductToTC">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Revenue">
+            <EntityTypeMapping TypeName="InnosixModel.Revenue">
+              <MappingFragment StoreEntitySet="Revenue">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RevenueName" ColumnName="RevenueName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="InnosixModel.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServicesName" ColumnName="ServicesName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicesToTC">
+            <EntityTypeMapping TypeName="InnosixModel.ServicesToTC">
+              <MappingFragment StoreEntitySet="ServicesToTC">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="ServicesId" ColumnName="ServicesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stage">
+            <EntityTypeMapping TypeName="InnosixModel.Stage">
+              <MappingFragment StoreEntitySet="Stage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCActive">
+            <EntityTypeMapping TypeName="InnosixModel.TCActive">
+              <MappingFragment StoreEntitySet="TCActive">
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCAdmin">
+            <EntityTypeMapping TypeName="InnosixModel.TCAdmin">
+              <MappingFragment StoreEntitySet="TCAdmin">
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="ClusterRelationId" ColumnName="ClusterRelationId" />
+                <ScalarProperty Name="FreetextNoteField" ColumnName="FreetextNoteField" />
+                <ScalarProperty Name="InnosixAccountManagerId" ColumnName="InnosixAccountManagerId" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCBasicInfo">
+            <EntityTypeMapping TypeName="InnosixModel.TCBasicInfo">
+              <MappingFragment StoreEntitySet="TCBasicInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyPhone" ColumnName="CompanyPhone" />
+                <ScalarProperty Name="LegalSuffix" ColumnName="LegalSuffix" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCBusinessInfo">
+            <EntityTypeMapping TypeName="InnosixModel.TCBusinessInfo">
+              <MappingFragment StoreEntitySet="TCBusinessInfo">
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="BusinessSummary" ColumnName="BusinessSummary" />
+                <ScalarProperty Name="CompanyDescription" ColumnName="CompanyDescription" />
+                <ScalarProperty Name="NaceCodeId" ColumnName="NaceCodeId" />
+                <ScalarProperty Name="RevenueYear" ColumnName="RevenueYear" />
+                <ScalarProperty Name="FullTimeEmployeesId" ColumnName="FullTimeEmployeesId" />
+                <ScalarProperty Name="FTEyear" ColumnName="FTEyear" />
+                <ScalarProperty Name="KeyCompetitors" ColumnName="KeyCompetitors" />
+                <ScalarProperty Name="KeyPartners" ColumnName="KeyPartners" />
+                <ScalarProperty Name="LargestOwners" ColumnName="LargestOwners" />
+                <ScalarProperty Name="MaturityStageId" ColumnName="MaturityStageId" />
+                <ScalarProperty Name="ProfitMaking" ColumnName="ProfitMaking" />
+                <ScalarProperty Name="RevenueId" ColumnName="RevenueId" />
+                <ScalarProperty Name="Established" ColumnName="Established" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCContact">
+            <EntityTypeMapping TypeName="InnosixModel.TCContact">
+              <MappingFragment StoreEntitySet="TCContact">
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="ContactPersonEmail" ColumnName="ContactPersonEmail" />
+                <ScalarProperty Name="ContactPersonPhone" ColumnName="ContactPersonPhone" />
+                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCGeneral">
+            <EntityTypeMapping TypeName="InnosixModel.TCGeneral">
+              <MappingFragment StoreEntitySet="TCGeneral">
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCIdealPartner">
+            <EntityTypeMapping TypeName="InnosixModel.TCIdealPartner">
+              <MappingFragment StoreEntitySet="TCIdealPartner">
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="IdealCorporatePartnerNace" ColumnName="IdealCorporatePartnerNace" />
+                <ScalarProperty Name="IdealCorporatePartnerName" ColumnName="IdealCorporatePartnerName" />
+                <ScalarProperty Name="IdealCorporatePartnerTechnologyFocus" ColumnName="IdealCorporatePartnerTechnologyFocus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCRating">
+            <EntityTypeMapping TypeName="InnosixModel.TCRating">
+              <MappingFragment StoreEntitySet="TCRating">
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="Financials" ColumnName="Financials" />
+                <ScalarProperty Name="Fundamentals" ColumnName="Fundamentals" />
+                <ScalarProperty Name="Market" ColumnName="Market" />
+                <ScalarProperty Name="ManagementAndExecution" ColumnName="ManagementAndExecution" />
+                <ScalarProperty Name="BML" ColumnName="BML" />
+                <ScalarProperty Name="BMLConfidenceIndex" ColumnName="BMLConfidenceIndex" />
+                <ScalarProperty Name="IntellectualProperty" ColumnName="IntellectualProperty" />
+                <ScalarProperty Name="Technology" ColumnName="Technology" />
+                <ScalarProperty Name="TechnologyRisk" ColumnName="TechnologyRisk" />
+                <ScalarProperty Name="TML" ColumnName="TML" />
+                <ScalarProperty Name="TMLConfidenceIndex" ColumnName="TMLConfidenceIndex" />
+                <ScalarProperty Name="OverallRating" ColumnName="OverallRating" />
+                <ScalarProperty Name="OverallRatingConfidenceIndex" ColumnName="OverallRatingConfidenceIndex" />
+                <ScalarProperty Name="RatingDate" ColumnName="RatingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCTechnology">
+            <EntityTypeMapping TypeName="InnosixModel.TCTechnology">
+              <MappingFragment StoreEntitySet="TCTechnology">
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="AdditionalTechTags" ColumnName="AdditionalTechTags" />
+                <ScalarProperty Name="Patents" ColumnName="Patents" />
+                <ScalarProperty Name="OtherIpNotPatented" ColumnName="OtherIpNotPatented" />
+                <ScalarProperty Name="TechnologySectorId" ColumnName="TechnologySectorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechDomain">
+            <EntityTypeMapping TypeName="InnosixModel.TechDomain">
+              <MappingFragment StoreEntitySet="TechDomain">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DomainName" ColumnName="DomainName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechDomainToTC">
+            <EntityTypeMapping TypeName="InnosixModel.TechDomainToTC">
+              <MappingFragment StoreEntitySet="TechDomainToTC">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="TechDomainId" ColumnName="TechDomainId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechSector">
+            <EntityTypeMapping TypeName="InnosixModel.TechSector">
+              <MappingFragment StoreEntitySet="TechSector">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TechSectorName" ColumnName="TechSectorName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechTag">
+            <EntityTypeMapping TypeName="InnosixModel.TechTag">
+              <MappingFragment StoreEntitySet="TechTag">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="ParentsCount" ColumnName="ParentsCount" />
+                <ScalarProperty Name="ChildrenCount" ColumnName="ChildrenCount" />
+                <ScalarProperty Name="UsageCount" ColumnName="UsageCount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechTagDeclined">
+            <EntityTypeMapping TypeName="InnosixModel.TechTagDeclined">
+              <MappingFragment StoreEntitySet="TechTagDeclined">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechTagParents">
+            <EntityTypeMapping TypeName="InnosixModel.TechTagParents">
+              <MappingFragment StoreEntitySet="TechTagParents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TechTagId" ColumnName="TechTagId" />
+                <ScalarProperty Name="ParentTechTagId" ColumnName="ParentTechTagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechTagToTC">
+            <EntityTypeMapping TypeName="InnosixModel.TechTagToTC">
+              <MappingFragment StoreEntitySet="TechTagToTC">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="TechTagId" ColumnName="TechTagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VTcClaim">
+            <EntityTypeMapping TypeName="InnosixModel.VTcClaim">
+              <MappingFragment StoreEntitySet="VTcClaim">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="LegalSuffix" ColumnName="LegalSuffix" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="TechTags" ColumnName="TechTags" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VTcWithTags">
+            <EntityTypeMapping TypeName="InnosixModel.VTcWithTags">
+              <MappingFragment StoreEntitySet="VTcWithTags">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="LegalSuffix" ColumnName="LegalSuffix" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TechTags" ColumnName="TechTags" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VTcWithTagsUser">
+            <EntityTypeMapping TypeName="InnosixModel.VTcWithTagsUser">
+              <MappingFragment StoreEntitySet="VTcWithTagsUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="LegalSuffix" ColumnName="LegalSuffix" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="TechTags" ColumnName="TechTags" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VUserTcClaim">
+            <EntityTypeMapping TypeName="InnosixModel.VUserTcClaim">
+              <MappingFragment StoreEntitySet="VUserTcClaim">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="TcId" ColumnName="TcId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="LegalSuffix" ColumnName="LegalSuffix" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="InnosixModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="GetAdditionalTechTags" FunctionName="InnosixModel.Store.GetAdditionalTechTags">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnosixModel.GetAdditionalTechTags_Result">
+                <ScalarProperty Name="TCid" ColumnName="TCid" />
+                <ScalarProperty Name="AdditionalTechTags" ColumnName="AdditionalTechTags" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTagHierarchy" FunctionName="InnosixModel.Store.GetTagHierarchy">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InnosixModel.GetTagHierarchy_Result">
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="Node" ColumnName="Node" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

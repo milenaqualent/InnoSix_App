@@ -1,0 +1,59 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "PortfoliosGridView";
+        settings.CallbackRouteValues = new { Controller = "Portfolios", Action = "PortfoliosGridViewPartial" };
+
+		settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Portfolios", Action = "PortfoliosGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Portfolios", Action = "PortfoliosGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Portfolios", Action = "PortfoliosGridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.SettingsText.ConfirmDelete = "Deleting this portfolio will also delete all items in it. Would you like to continue?";
+
+		settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+		settings.KeyFieldName = "Id";
+
+		settings.SettingsPager.Visible = true;
+		settings.Settings.ShowGroupPanel = true;
+		settings.Settings.ShowFilterRow = true;
+		settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+		settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+		settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+		settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+		settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+		settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "#";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Show portfolio", "PortfolioItems", new {id = DataBinder.Eval(c.DataItem, "Id")})
+                );
+            });
+            column.Settings.AllowDragDrop = DefaultBoolean.False;
+            column.Settings.AllowSort = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.ReadOnly = true;
+        });
+				settings.Columns.Add("Name");
+                settings.Columns.Add(column =>
+                {
+                    column.Caption = "Number of tech companies";
+                    column.FieldName = "NrOfTCs";
+                    column.EditFormSettings.Visible = DefaultBoolean.False;
+                    column.ReadOnly = true;
+                });
+			});
+		if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

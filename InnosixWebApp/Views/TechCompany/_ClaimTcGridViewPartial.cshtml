@@ -1,0 +1,65 @@
+﻿@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "ClaimTcGridView";
+        settings.CallbackRouteValues = new { Controller = "TechCompany", Action = "ClaimTcGridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "TechCompany", Action = "ClaimTcGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "TechCompany", Action = "ClaimTcGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "TechCompany", Action = "ClaimTcGridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.SettingsSearchPanel.Visible = true;
+
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "#";
+            column.SetDataItemTemplateContent(c =>
+            {
+                using (Html.BeginForm("ClaimTechCompany", "TechCompany", FormMethod.Post))
+                {
+                    ViewContext.Writer.Write(Html.Hidden("id", DataBinder.Eval(c.DataItem, "Id")));
+                    ViewContext.Writer.Write(
+                        "<div class=\"form-group\">" +
+                        "<div class=\"col-md-6 col-xs-12\">" +
+                        "<input type=\"submit\" value=\"Claim\" class=\"btn btn-default\" />" +
+                        "</div>"
+
+                        );
+                }
+            });
+            column.Settings.AllowDragDrop = DefaultBoolean.False;
+            column.Settings.AllowSort = DefaultBoolean.False;
+        });
+        settings.Columns.Add("CompanyName");
+        settings.Columns.Add("City");
+        settings.Columns.Add("Country");
+        settings.Columns.Add("CompanyEmail");
+        settings.Columns.Add("LegalSuffix");
+        settings.Columns.Add("CompanyWebsite");
+        settings.Columns.Add("TechTags");
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

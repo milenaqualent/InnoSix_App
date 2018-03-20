@@ -1,0 +1,69 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "AdditionalTagsGridView";
+        settings.CallbackRouteValues = new { Controller = "Tags", Action = "AdditionalTagsGridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Tags", Action = "AdditionalTagsGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Tags", Action = "AdditionalTagsGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Tags", Action = "AdditionalTagsGridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "TCid";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "#";
+            column.SetDataItemTemplateContent(c =>
+            {
+                using (Html.BeginForm("AcceptAdditionalTag", "Tags", FormMethod.Post))
+                {
+                    ViewContext.Writer.Write(Html.Hidden("tagName", DataBinder.Eval(c.DataItem, "AdditionalTechTags")));
+                    ViewContext.Writer.Write(
+                        "<div class=\"form-group\">" +
+                        "<div class=\"col-md-6  col-xs-12\">" +
+                        "<input type=\"submit\" value=\"Accept\" class=\"btn btn-default\" />" +
+                        "</div>" +
+                        "</div>"
+                    );
+                }
+
+                using (Html.BeginForm("DeclineAdditionalTag", "Tags", FormMethod.Post))
+                {
+                    ViewContext.Writer.Write(Html.Hidden("tagName", DataBinder.Eval(c.DataItem, "AdditionalTechTags")));
+                    ViewContext.Writer.Write(
+                        "<div class=\"form-group\">" +
+                        "<div class=\"col-md-6 col-xs-12\">" +
+                        "<input type=\"submit\" value=\"Decline\" class=\"btn btn-default\" />" +
+                        "</div>" +
+                        "</div>"
+                        );
+                }
+            });
+            column.Settings.AllowDragDrop = DefaultBoolean.False;
+            column.Settings.AllowSort = DefaultBoolean.False;
+        });
+        settings.Columns.Add("TCid");
+        settings.Columns.Add("AdditionalTechTags");
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

@@ -1,0 +1,87 @@
+﻿@model InnosixWebApp.Models.PortfolioItemViewModel
+
+@{
+    ViewBag.Title = "Edit company: " + Model.TcBasicInfo.CompanyName;
+}
+
+<h2 class="title">Edit company: @Model.TcBasicInfo.CompanyName</h2>
+
+@ViewBag.Message
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal edit-form">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.PortfolioItem.Id)
+        @Html.HiddenFor(model => model.PortfolioItem.TCid)
+        @Html.HiddenFor(model => model.PortfolioItem.OpportunityDate)
+        
+        <input type="hidden" name="portfolioId" value="@ViewData["PortfolioId"]"/>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PortfolioItem.StageId, new { @class = "control-label col-md-2 edit-form-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PortfolioItem.StageId, Model.Stages, new { @class = "form-control edit-form-input" })
+                @Html.ValidationMessageFor(model => model.PortfolioItem.StageId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PortfolioItem.NextMoveId, new { @class = "control-label col-md-2 edit-form-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PortfolioItem.NextMoveId, Model.Stages, new { @class = "form-control edit-form-input" })
+                @Html.ValidationMessageFor(model => model.PortfolioItem.NextMoveId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PortfolioItem.NextMoveDate, new { @class = "control-label col-md-2 edit-form-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PortfolioItem.NextMoveDate, "{0:yyyy-MM-dd}", new { @class = "form-control edit-form-input", type = "date" })
+                @Html.ValidationMessageFor(model => model.PortfolioItem.NextMoveDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PortfolioItem.ResponsibleEmail, new { @class = "control-label col-md-2 edit-form-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PortfolioItem.ResponsibleEmail, new { htmlAttributes = new { @class = "form-control edit-form-input", type = "email" } })
+                @Html.ValidationMessageFor(model => model.PortfolioItem.ResponsibleEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PortfolioItem.ResponsibleName, new { @class = "control-label col-md-2 edit-form-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PortfolioItem.ResponsibleName, new { htmlAttributes = new { @class = "form-control edit-form-input" } })
+                @Html.ValidationMessageFor(model => model.PortfolioItem.ResponsibleName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PortfolioItem.Comment, new { @class = "control-label col-md-2 edit-form-label" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.PortfolioItem.Comment, new { @class = "form-control edit-form-input", maxlength = "1000" })
+                @Html.ValidationMessageFor(model => model.PortfolioItem.Comment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row form-group btn-section">
+            <div class="col col-xs-6">
+                @Html.ActionLink("Back", "PortfolioItems", "Portfolios", new { id = ViewData["PortfolioId"] }, new { @class = "btn back-btn" })
+            </div>
+            <div class="col col-xs-6 text-right">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        </div>
+    </div>
+}
+
+<hr class="seperate-line" />
+
+@Html.Partial("~/Views/TechCompany/Index.cshtml", Model.TcBasicInfo)

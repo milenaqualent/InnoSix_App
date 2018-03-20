@@ -1,0 +1,15 @@
+﻿@model long
+
+@{
+    ViewBag.Title = ViewBag.PortfolioName;
+}
+
+<h2 class="title">@ViewBag.PortfolioName</h2>
+
+@Html.ActionLink("Summary report", "SummaryReport", new { id = Model }, new { @class = "btn btn-primary btn-small-txt" })
+@Html.ActionLink("Save summary report (HTML)", "SendSummaryReportAsHtml", new { id = Model }, new { @class = "btn btn-primary btn-small-txt" })
+@Html.ActionLink("Save summary report (PDF)", "PrintSummaryReport", new { id = Model }, new { @class = "btn btn-primary btn-small-txt" })
+
+<section class="mvc-table">
+    @Html.Action("PortfolioItemsGridViewPartial", new { id = Model })
+</section>

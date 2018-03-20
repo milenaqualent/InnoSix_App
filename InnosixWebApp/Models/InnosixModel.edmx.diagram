@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8ac57b3c05f243529ffa6991a5fd1499" Name="Diagram1">
+        <EntityTypeShape EntityType="InnosixModel.AccountManager" Width="1.5" PointX="3" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="45.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="47.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.AspNetUsers" Width="1.5" PointX="3" PointY="33.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.AspNetUsersTcClaim" Width="1.5" PointX="5.25" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.AspNetUsersToPortfolio" Width="1.5" PointX="13.5" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.AspNetUsersToStage" Width="1.5" PointX="11.25" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.AspNetUsersToTC" Width="1.5" PointX="5.25" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.BusinessModel" Width="1.5" PointX="3" PointY="38.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.BusinessModelToTC" Width="1.5" PointX="5.25" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.Cluster" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.Country" Width="1.5" PointX="0.75" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.Employees" Width="1.5" PointX="9" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.Maturity" Width="1.5" PointX="9" PointY="34.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.Nace" Width="1.5" PointX="9" PointY="36.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.Portfolio" Width="1.5" PointX="11.25" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.PortfolioItem" Width="1.5" PointX="8.25" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.PortfolioToPortfolioItem" Width="1.5" PointX="13.5" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.Product" Width="1.5" PointX="6" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.ProductToTC" Width="1.5" PointX="8.25" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.Revenue" Width="1.5" PointX="9" PointY="39.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.Services" Width="1.5" PointX="6" PointY="42.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.ServicesToTC" Width="1.5" PointX="8.25" PointY="31.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.Stage" Width="1.5" PointX="6" PointY="36.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TCActive" Width="1.5" PointX="5.25" PointY="39.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TCAdmin" Width="1.5" PointX="5.25" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TCBasicInfo" Width="1.5" PointX="3" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TCBusinessInfo" Width="1.5" PointX="11.25" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TCContact" Width="1.5" PointX="5.25" PointY="50.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TCGeneral" Width="1.5" PointX="5.25" PointY="53.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TCIdealPartner" Width="1.5" PointX="5.25" PointY="56" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TCRating" Width="1.5" PointX="5.25" PointY="58.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TCTechnology" Width="1.5" PointX="5.25" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TechDomain" Width="1.5" PointX="9" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TechDomainToTC" Width="1.5" PointX="11.25" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TechSector" Width="1.5" PointX="3" PointY="41.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TechTag" Width="1.5" PointX="9" PointY="42.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TechTagDeclined" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TechTagParents" Width="1.5" PointX="11.25" PointY="42.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.TechTagToTC" Width="1.5" PointX="11.25" PointY="32.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.VTcClaim" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.VTcWithTags" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.VTcWithTagsUser" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnosixModel.VUserTcClaim" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="InnosixModel.FK_TCAdmin_AccountManager" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_AspNetUsersTcClaim_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_AspNetUsersToPortfolio_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_AspNetUsersToStage_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_AspNetUsersToTC_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_AspNetUsersTcClaim_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_AspNetUsersToPortfolio_Portfolio" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_AspNetUsersToStage_Stage" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_AspNetUsersToTC_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_BusinessModelToTC_BusinessModel" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_BusinessModelToTC_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCAdmin_Cluster" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCBasicInfo_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCBusinessInfo_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCBusinessInfo_Maturity" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCBusinessInfo_Nace" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_PortfolioToPortfolioItem_Portfolio" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_PorftolioItem_Stage" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_PorftolioItem_Stage1" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_PorftolioItem_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_PortfolioToPortfolioItem_PortfolioItem" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_ProductToTC_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_ProductToTC_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCBusinessInfo_Revenue" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_ServicesToTC_Services" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_ServicesToTC_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCActive_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCAdmin_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCBusinessInfo_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCContact_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCGeneral_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCIdealPartner_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCRating_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCTechnology_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TechDomainToTC_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TechTagToTC_TCBasicInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TCTechnology_TechSector" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TechDomainToTC_TechDomain" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TechTagParents_TechTag" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TechTagParents_TechTag_Parent" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.FK_TechTagToTC_TechTag" ManuallyRouted="false" />
+        <AssociationConnector Association="InnosixModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

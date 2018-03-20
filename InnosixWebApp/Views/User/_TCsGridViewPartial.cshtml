@@ -1,0 +1,79 @@
+@using System.Web.UI.WebControls
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "TCsGridView";
+        settings.CallbackRouteValues = new { Controller = "User", Action = "TCsGridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "User", Action = "TCsGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "User", Action = "TCsGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "User", Action = "TCsGridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+
+        settings.SettingsSearchPanel.Visible = true;
+
+        settings.Width = Unit.Percentage(100);
+
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "#";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Preview", "PreviewTechCompany", "User", new { id = DataBinder.Eval(c.DataItem, "Id") }, null)
+                    );
+            });
+            column.Settings.AllowDragDrop = DefaultBoolean.False;
+            column.Settings.AllowSort = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.ReadOnly = true;
+            column.Width = Unit.Pixel(80);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "#";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Add to portfolio", "AddCompanyToPortfolio", "Portfolios", new { id = DataBinder.Eval(c.DataItem, "Id") }, null)
+                );
+            });
+            column.Settings.AllowDragDrop = DefaultBoolean.False;
+            column.Settings.AllowSort = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.ReadOnly = true;
+            column.Width = Unit.Pixel(135);
+        });
+        settings.Columns.Add("CompanyName");
+        settings.Columns.Add("City");
+        settings.Columns.Add("Country");
+        settings.Columns.Add("CompanyEmail");
+        settings.Columns.Add("LegalSuffix");
+        settings.Columns.Add("CompanyWebsite");
+        settings.Columns.Add("TechTags");
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

@@ -1,0 +1,62 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "UserGridView";
+        settings.CallbackRouteValues = new { Controller = "UserManager", Action = "UserGridViewPartial" };
+
+		settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "UserManager", Action = "UserGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "UserManager", Action = "UserGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "UserManager", Action = "UserGridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+		settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = false;
+
+		settings.KeyFieldName = "Id";
+
+		settings.SettingsPager.Visible = true;
+		settings.Settings.ShowGroupPanel = true;
+		settings.Settings.ShowFilterRow = true;
+		settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+		settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+		settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+		settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+		settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+		settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+                settings.CommandButtonInitialize = (s, e) =>
+                {
+                    if (e.ButtonType == ColumnCommandButtonType.Delete)
+                    {
+                        var g = s as MVCxGridView;
+                        var id = (string) g.GetRowValues(e.VisibleIndex, "Id");
+                        e.Visible = id != "2af02e24-5996-46fc-bdf0-ce4fe03a955f";
+                    }
+                };
+
+                settings.Columns.Add(column =>
+                {
+                    column.Caption = "#";
+                    column.SetDataItemTemplateContent(c =>
+                    {
+                        ViewContext.Writer.Write(
+                            Html.ActionLink("Edit", "EditUser", new {id = DataBinder.Eval(c.DataItem, "Id")})
+                        );
+                    });
+                    column.Settings.AllowDragDrop = DefaultBoolean.False;
+                    column.Settings.AllowSort = DefaultBoolean.False;
+                });
+
+				settings.Columns.Add("Id");
+				settings.Columns.Add("Email");
+				settings.Columns.Add("EmailConfirmed");
+	            settings.Columns.Add("Role");
+	});
+		if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

@@ -1,0 +1,266 @@
+﻿@using InnosixWebApp.Models
+@model InnosixWebApp.Models.CreateTechCompanyViewModel
+
+@{
+    ViewBag.Title = " COMPANY REGISTRATION";
+}
+
+<h2 class="title">Create Tech Company</h2>
+
+<div class="row mt-15">
+    <div class="col-xs-12">
+        @ViewBag.Message  
+    </div>
+</div>
+
+@using (Html.BeginForm("CreateTechCompany", "TechCompany", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+        <div class="form-group">
+            <label class="control-label col-md-3">Company name <span class="text-danger">*</span></label>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control edit-form-input", required = "required" } })
+                @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">Company website <span class="text-danger">*</span></label>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.CompanyWebsite, new { htmlAttributes = new { @class = "form-control edit-form-input", required = "required", placeholder = "ex. https://example.com/" } })
+                @Html.ValidationMessageFor(model => model.CompanyWebsite, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">Country <span class="text-danger">*</span></label>
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.CountryId, new SelectList(Model.CountryList, "Id", "CountryName", Model.CountryId), "", new { @class = "form-control edit-form-input selectpicker show-menu-arrow", required = "required" })
+                @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">Company email <span class="text-danger">*</span></label>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.CompanyEmail, new { htmlAttributes = new { @class = "form-control edit-form-input", type = "email", required = "required" } })
+                @Html.ValidationMessageFor(model => model.CompanyEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">Company phone <span class="text-danger">*</span></label>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.CompanyPhone, new { htmlAttributes = new { @class = "form-control edit-form-input", required = "required" } })
+                @Html.ValidationMessageFor(model => model.CompanyPhone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row mt-15">
+                        <div class="col col-xs-12">
+                            @Html.DropDownList("ParentTags", Model.TagList, "Select tag", new { id = "tag1", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row mt-15">
+                        <div class="col col-xs-12">
+                            <select class="form-control" id="tag2" name="tag2"></select>
+                        </div>
+                    </div>
+                    <div class="row mt-15">
+                        <div class="col col-xs-12">
+                            <select class="form-control" id="tag3" name="tag3"></select>
+                        </div>
+                    </div>
+                    <div class="row mt-15">
+                        <div class="col col-xs-12">
+                            <select class="form-control" id="tag4" name="tag4"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mt-15">
+                        <div class="col col-xs-12">
+                            <div id="selectedTagList">Selected tag:</div>
+                        </div>
+                    </div>
+                    <div class="row mt-15">
+                        <h5 id="activeSelectedTag">None selected</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-15">
+                <div class="col col-xs-12 text-right">
+                    <button type="button" onclick="addTagToList()" class="btn btn-default">Add Tag</button>
+                </div>
+            </div>
+            <div class="row mt-15 tags-labal-section">
+                <div class="tech-tags col-xs-12">
+                    <div id="addTagList" class="tech-tags col-xs-12">
+                        @*@foreach (var tag in (List<TechTag>)ViewData["Tags"])
+                        {
+                            <div class="tech-tags-item">
+                                <input type="hidden" name="tagIds[]" value="@tag.Id" required="required" />
+                                <a data-toggle="tooltip" class="tip-bottom" data-original data-id="@tag.Id" data-name="@tag.TagName" title="@tag.Description">
+                                    @tag.TagName
+                                </a>
+                                <span class="remove-btn" onclick="removeListElement('div a[data-id=&quot;@tag.Id&quot;]')">X</span>
+                            </div>
+                        }*@
+                    </div>
+                </div>
+            </div>
+        </div>
+                        
+        <div class="form-group multiselect-btns">
+            <label class="control-label col-md-3">Technology domains <span class="text-danger">*</span></label>
+            <div class="col-md-9">
+                @Html.ListBoxFor(model => model.TechDomainIds, new MultiSelectList(Model.TechDomainList, "Id", "DomainName", Model.TechDomainIds), new { @class = "multi-select", size = 5 })
+                @Html.ValidationMessage("TechDomainIds", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12 text-right">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/jscript">
+
+    $(function () {
+        $('#tag1').change(function () {
+            $('#tag2, #tag3, #tag4').find('option').remove();
+            getTagChildList('#tag1', '#tag2');
+            changeTagSelected();
+        });
+
+        $('#tag2').change(function () {
+            $('#tag3, #tag4').find('option').remove();
+            getTagChildList('#tag2', '#tag3');
+            changeTagSelected();
+        });
+
+        $('#tag3').change(function () {
+            $('#tag4').find('option').remove();
+            getTagChildList('#tag3', '#tag4');
+            changeTagSelected();
+        });
+
+        $('#tag4').change(function () {
+            changeTagSelected();
+        });
+
+        function getTagChildList(selectParentId, selectChildId) {
+            $.getJSON('/TechCompany/TagChildList/' + $(selectParentId).val(), function (data) {
+                if (data.length <= 0)
+                    return false;
+                var items = '<option>Select tag</option>';
+                $.each(data, function (i, tag) {
+                    items += "<option value='" + tag.Value + "'>" + tag.Text + "</option>";
+                });
+                $(selectChildId).html(items);
+            });
+        };
+    });
+
+    function addTagToList() {
+        if (isNumeric($('#tag4').val())) {
+            if (checkIfAlreadyAdded($('#tag4').val()))
+                return false;
+            createListElement('#tag4');
+            return false;
+        }
+        if (isNumeric($('#tag3').val())) {
+            if (checkIfAlreadyAdded($('#tag3').val()))
+                return false;
+            createListElement('#tag3');
+            return false;
+        }
+        if (isNumeric($('#tag2').val())) {
+            if (checkIfAlreadyAdded($('#tag2').val()))
+                return false;
+            createListElement('#tag2');
+            return false;
+        }
+        if (isNumeric($('#tag1').val())) {
+            if (checkIfAlreadyAdded($('#tag1').val()))
+                return false;
+            createListElement('#tag1');
+            return false;
+        }
+    };
+
+    function checkIfAlreadyAdded(id) {
+        var elId = 'a[data-id="{0}"]'.format(id);
+        if ($(elId).length) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    function createListElement(elementId) {
+        $('#addTagList').append(
+            '<div class="tech-tags-item"><input type="hidden" name="tagIds[]" value="{0}" /><a data-id="{0}" data-name="{1}">{1} </a><span class="remove-btn" onclick="removeListElement(\'div a[data-id=&quot;{0}&quot;]\')">X</span></div>'
+                .format($(elementId).val(), getTagName($(elementId + ' option:selected').text())));
+    };
+
+    function removeListElement(tag) {
+        $(tag).parent().remove();
+    };
+
+    function changeTagSelected() {
+        var breadcrumbs = "Selected tag: ";
+        var selectedTag = "Non selected";
+
+        if (isNumeric($('#tag1').val())) {
+            breadcrumbs += getTagName($('#tag1' + ' option:selected').text());
+            selectedTag = getTagName($('#tag1' + ' option:selected').text());
+        }
+        if (isNumeric($('#tag2').val())) {
+            breadcrumbs += ' > ';
+            breadcrumbs += getTagName($('#tag2' + ' option:selected').text());
+            selectedTag = getTagName($('#tag2' + ' option:selected').text());
+        }
+        if (isNumeric($('#tag3').val())) {
+            breadcrumbs += ' > ';
+            breadcrumbs += getTagName($('#tag3' + ' option:selected').text());
+            selectedTag = getTagName($('#tag3' + ' option:selected').text());
+        }
+        if (isNumeric($('#tag4').val())) {
+            breadcrumbs += ' > ';
+            breadcrumbs += getTagName($('#tag4' + ' option:selected').text());
+            selectedTag = getTagName($('#tag4' + ' option:selected').text());
+        }
+
+        $('#selectedTagList').html(breadcrumbs);
+        $('#activeSelectedTag').html(selectedTag);
+    };
+
+    function getTagName(value) {
+        var index = value.indexOf(' - ');
+        if (index == -1)
+            return value;
+        return value.substring(0, index);
+    };
+
+    function isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    };
+
+    $(document).ready(function () {
+        $('.multi-select').multiselect();
+    });
+
+</script>

@@ -1,0 +1,646 @@
+﻿@model InnosixWebApp.Models.TCBasicInfo
+
+@{
+    ViewBag.Title = "TechCompany";
+}
+
+
+
+<section id="company-business-card">
+    <div class="container">
+        <div class="row company-info">
+            <div class="col col-xs-7 company-name">
+                <h2>@(Model.CompanyName ?? "")  @(Model.LegalSuffix ?? "")</h2>
+                <h3>@(Model.TCTechnology?.TechSector?.TechSectorName ?? "")</h3>
+                <h4>
+                    @foreach (var techDomain in Model.TechDomainToTC)
+                    {
+                        <span>@Html.DisplayFor(item => techDomain.TechDomain.DomainName)</span>
+                    }
+                </h4>
+            </div>
+            <div class="col col-xs-5 logo">
+                <img src="@(Model.LogoUrl ?? "")" />
+            </div>
+        </div>
+        @if (Request.IsAuthenticated && User.IsInRole("User"))
+        {
+            @Html.ActionLink("Add to portfoltio", "AddCompanyToPortfolio", "Portfolios", new { id = Model.Id }, new { @class = "btn back-btn" })
+        }
+
+        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit tech company", "TcEdit", "Admin", new { id = Model.Id }, new { @class = "btn back-btn" })
+        }
+    </div>
+</section>
+
+
+
+<section id="content">
+    <div class="container">
+        <div class="row company-details">
+
+            <div class="col-sm-12 hidden-md-up">
+                <div class="box-details">
+                    <div>
+                        <h2>Summary</h2>
+                        <p>@(Model.TCBusinessInfo?.BusinessSummary ?? "")</p>
+                    </div>
+
+                    <div>
+                        <h2>Overview</h2>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Country</td>
+                                    <td>@(Model.Country?.CountryName ?? "")</td>
+                                </tr>
+                                <tr>
+                                    <td>Established</td>
+                                    <td>@(Model.TCBusinessInfo?.Established ?? 0)</td>
+                                </tr>
+                                <tr>
+                                    <td>Business Models</td>
+                                    <td>
+                                        @foreach (var businessModel in Model.BusinessModelToTC)
+                                        {
+                                            <a data-toggle="tooltip" class="tip-bottom" data-original title="@Html.DisplayFor(item => businessModel.BusinessModel.Description)">
+                                                @Html.DisplayFor(item => businessModel.BusinessModel.BusinessModelName)
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Maturity stage</td>
+                                    <td>
+                                        <a data-toggle="tooltip" class="tip-bottom" data-original title="@(Model.TCBusinessInfo?.Maturity?.Description ?? "")">
+                                            @(Model.TCBusinessInfo?.Maturity?.MaturityStageName ?? "")
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Full Time Employees</td>
+                                    <td>
+                                        <a data-toggle="tooltip" class="tip-bottom" data-original title="@(Model.TCBusinessInfo?.Employees?.Description ?? "")">
+                                            @(Model.TCBusinessInfo?.Employees?.EmployeeTypeName ?? "")
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Revenue</td>
+                                    <td>
+                                        <a data-toggle="tooltip" class="tip-bottom" data-original title="@(Model.TCBusinessInfo?.Revenue?.Description ?? "")">
+                                            @(Model.TCBusinessInfo?.Revenue?.RevenueName ?? "")
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Profit Making</td>
+                                    <td>@(Model.TCBusinessInfo?.ProfitMaking ?? false)</td>
+                                </tr>
+                                <tr>
+                                    <td>Last updated</td>
+                                    <td>@(Model.TCGeneral?.LastUpdated.ToString("dd/MM/yyyy") ?? "")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="tech-tags row">
+                        <div class="col col-xs-12">
+                            <h2>Tags</h2>
+
+                            @foreach (var tag in Model.TechTagToTC)
+                            {
+                                <div class="tech-tags-item"><a data-toggle="tooltip" class="tip-bottom" data-original title="@Html.DisplayFor(item => tag.TechTag.Description)">@Html.DisplayFor(item => tag.TechTag.TagName)</a></div>
+                            }
+                        </div>
+                    </div>
+                    <div>
+                        <h2>Rating</h2>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Business Maturity Level</td>
+                                    <td>@(Model.TCRating?.BMLConfidenceIndex ?? 0)</td>
+                                </tr>
+                                <tr>
+                                    <td>Technology Maturity Level</td>
+                                    <td>@(Model.TCRating?.TMLConfidenceIndex ?? 0)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-8 col-sm-12">
+                <div>
+                    <ul class="item item-menu nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a role="tab" data-toggle="tab" href="#exampleAccordion1" aria-controls="exampleAccordion1">
+                                Company profile
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a role="tab" data-toggle="tab" href="#exampleAccordion2" aria-controls="exampleAccordion2">
+                                Products
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a role="tab" data-toggle="tab" href="#exampleAccordion3" aria-controls="exampleAccordion3">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="item item-collapse tab-content">
+                        <div id="exampleAccordion1" class="in tab-pane active" role="tabpanel">
+
+                            <div id="accordion" role="tablist">
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="headingOne">
+
+                                        <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <h5 class="mb-0">
+                                                Summary
+                                                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                                            </h5>
+                                        </a>
+
+                                    </div>
+
+                                    <div id="collapseOne" class="in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            @(Model.TCBusinessInfo?.BusinessSummary ?? "")
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <a data-toggle="collapse" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+
+                                            <h5 class="mb-0">
+                                                Overview
+                                                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                                            </h5>
+                                        </a>
+                                    </div>
+
+                                    <div id="collapseThree" class="in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Country</td>
+                                                        <td class="font-bold">@(Model.Country?.CountryName ?? "")</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Established</td>
+                                                        <td class="font-bold">@(Model.TCBusinessInfo?.Established ?? 0)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Business Models</td>
+                                                        <td class="font-bold">
+                                                            @foreach (var businessModel in Model.BusinessModelToTC)
+                                                            {
+                                                                <a data-toggle="tooltip" class="tip-bottom" data-original title="@Html.DisplayFor(item => businessModel.BusinessModel.Description)">
+                                                                    @Html.DisplayFor(item => businessModel.BusinessModel.BusinessModelName)
+                                                                </a>
+                                                            }
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Maturity stage</td>
+                                                        <td class="font-bold">
+                                                            <a data-toggle="tooltip" class="tip-bottom" data-original title="@(Model.TCBusinessInfo?.Maturity?.Description ?? "")">
+                                                                @(Model.TCBusinessInfo?.Maturity?.MaturityStageName ?? "")
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Full Time Employees</td>
+                                                        <td class="font-bold">
+                                                            <a data-toggle="tooltip" class="tip-bottom" data-original title="@(Model.TCBusinessInfo?.Employees?.Description ?? "")">
+                                                                @(Model.TCBusinessInfo?.Employees?.EmployeeTypeName ?? "")
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Revenue</td>
+                                                        <td class="font-bold">
+                                                            <a data-toggle="tooltip" class="tip-bottom" data-original title="@(Model.TCBusinessInfo?.Revenue?.Description ?? "")">
+                                                                @(Model.TCBusinessInfo?.Revenue?.RevenueName ?? "")
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Profit Making</td>
+                                                        <td class="font-bold">@(Model.TCBusinessInfo?.ProfitMaking ?? false)</td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NACE code</td>
+                                                        <td class="font-bold">@(Model.TCBusinessInfo?.Nace?.NACEcode ?? "")</td>
+                                                    </tr>
+                                                    <tr class="tech-tags b-t">
+
+                                                        <td><h3>Technology tags</h3></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr class="tech-tags b-b">
+                                                        <td>
+                                                            <div class="w-100-table">
+                                                                @foreach (var tag in Model.TechTagToTC)
+                                                                {
+                                                                    <div class="tech-tags-item"><a data-toggle="tooltip" class="tip-bottom" data-original title="@Html.DisplayFor(item => tag.TechTag.Description)">@Html.DisplayFor(item => tag.TechTag.TagName)</a></div>
+                                                                }
+                                                            </div>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Company profile created</td>
+                                                        <td class="font-bold">@(Model.TCGeneral?.Created.ToString("dd/MM/yyyy") ?? "")</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Last updated</td>
+                                                        <td class="font-bold">@(Model.TCGeneral?.LastUpdated.ToString("dd/MM/yyyy") ?? "")</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="headingTwo">
+                                        <a data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                                            <h5 class="mb-0">
+                                                Rating
+                                                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                                            </h5>
+                                        </a>
+                                    </div>
+
+                                    <div id="collapseTwo" class="in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body rating-table">
+                                            <table class="table ">
+                                                <tbody>
+                                                    <tr class="tab-decor-line">
+                                                        <th>Business Readiness Level</th>
+                                                        <th>
+                                                            @(Model.TCRating?.BML.ToString("0.0") ?? "0")
+                                                            ( <span id="hearts-existing" class="RatingDots" data-rating='@(Model.TCRating?.BMLConfidenceIndex ?? 0)'></span> )
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pl-10">Fundamentals</td>
+                                                        <td class="font-bold">@(Model.TCRating?.Fundamentals.ToString("0.0") ?? "0")</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pl-10">Finanicals</td>
+                                                        <td class="font-bold">@(Model.TCRating?.Financials.ToString("0.0") ?? "0")</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pl-10">Management and Execution</td>
+                                                        <td class="font-bold">@(Model.TCRating?.ManagementAndExecution.ToString("0.0") ?? "0")</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pl-10">Market</td>
+                                                        <td class="font-bold">@(Model.TCRating?.Market.ToString("0.0") ?? "0")</td>
+                                                    </tr>
+
+                                                    <tr class="tab-decor-line">
+                                                        <th>Technology Readiness Level</th>
+                                                        <th>
+                                                            @(Model.TCRating?.TML.ToString("0.0") ?? "0")
+                                                            ( <span id="hearts-existing" class="RatingDots" data-rating='@(Model.TCRating?.TMLConfidenceIndex ?? 0)'></span> )
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pl-10">Technology</td>
+                                                        <td class="font-bold">@(Model.TCRating?.Technology.ToString("0.0") ?? "0")</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pl-10">Intellectual property</td>
+                                                        <td class="font-bold">@(Model.TCRating?.IntellectualProperty.ToString("0.0") ?? "0")</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pl-10">Technology Risk</td>
+                                                        <td class="font-bold">@(Model.TCRating?.TechnologyRisk.ToString("0.0") ?? "0")</td>
+                                                    </tr>
+                                                    <tr class="tab-decor-line">
+                                                        <th>Technology Overall Level</th>
+                                                        <th>
+                                                            @(Model.TCRating?.OverallRating.ToString("0.0") ?? "0")
+                                                            ( <span id="hearts-existing" class="RatingDots" data-rating='@(Model.TCRating?.OverallRatingConfidenceIndex ?? 0)'></span> )
+                                                        </th>
+                                                    </tr>
+                                                    <tr class="font-italic">
+                                                        <td class="pl-10">Rating date</td>
+                                                        <td class="font-bold">@(Model.TCRating?.RatingDate.ToString("dd-MM-yyyy") ?? "")</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (!string.IsNullOrWhiteSpace(Model.TCBusinessInfo?.CompanyDescription))
+                                {
+                                    <div class="card">
+                                        <div class="card-header" role="tab" id="headingFour">
+                                            <a data-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                                <h5 class="mb-0">
+                                                    Company desciption
+                                                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                                                </h5>
+                                            </a>
+                                        </div>
+
+                                        <div id="collapseFour" class="in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                            <div class="card-body">
+                                                @Model.TCBusinessInfo.CompanyDescription
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                    @if (Model.TCBusinessInfo?.FTEyear > 0)
+                                    {
+                                        <div class="card">
+                                            <div class="card-header" role="tab" id="headingFive">
+                                                <a data-toggle="collapse" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                                    <h5 class="mb-0">
+                                                        Technology and R&amp;D activities
+                                                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                                                    </h5>
+                                                </a>
+                                            </div>
+
+                                            <div id="collapseFive" class="in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                                <div class="card-body">
+                                                    @Model.TCBusinessInfo.FTEyear
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(Model.TCBusinessInfo?.KeyCompetitors))
+                                    {
+                                        <div class="card">
+                                            <div class="card-header" role="tab" id="headingSix">
+                                                <a data-toggle="collapse" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                    <h5 class="mb-0">
+                                                        Key competitors
+                                                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                                                    </h5>
+                                                </a>
+                                            </div>
+
+                                            <div id="collapseSix" class="in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                                <div class="card-body">
+                                                    @Model.TCBusinessInfo.KeyCompetitors
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(Model.TCBusinessInfo?.KeyPartners))
+                                    {
+                                        <div class="card">
+                                            <div class="card-header" role="tab" id="headingSeven">
+                                                <a data-toggle="collapse" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                                                    <h5 class="mb-0">
+                                                        Key Partners
+                                                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                                                    </h5>
+                                                </a>
+                                            </div>
+
+                                            <div id="collapseSeven" class="in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                                <div class="card-body">
+                                                    @Model.TCBusinessInfo.KeyPartners
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+                            <div id="exampleAccordion2" class="collapse tab-pane" role="tabpanel">
+                                <div class="mb-3">
+                                    @foreach (var product in Model.ProductToTC)
+                                    {
+                                        <div class="row product-tab">
+                                            <div class="col-sm-12 col-md-3 product-photo ">
+                                                <img src="@Html.DisplayFor(item => product.Product.ProductImage)" />
+                                            </div>
+                                            <div class="col-sm-12 col-md-9 product-details">
+                                                <h4>@Html.DisplayFor(item => product.Product.ProductName)</h4>
+                                                <p>
+                                                    @Html.DisplayFor(item => product.Product.ProductDescription)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div id="exampleAccordion3" class="collapse tab-pane" role="tabpanel">
+                                <div class="mb-3">
+                                    <div class="row">
+                                        <div class="col col-sm-6 col-xs-12">
+                                            <h3>Company</h3>
+                                            <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @(Model.Address1 ?? ""), @(Model.Address2 ?? ""), @(Model.Address3 ?? "")</p>
+                                            <p>@(Model.Zip ?? "") @(Model.City ?? "")</p>
+                                            <p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>@(Model.CompanyPhone ?? "")</p>
+                                            <p><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> @(Model.CompanyEmail ?? "")</p>
+                                            <p><span class="glyphicon glyphicon-home" aria-hidden="true"></span> @(Model.CompanyWebsite ?? "")</p>
+                                        </div>
+                                        <div class="col col-sm-6 col-xs-12">
+                                            <h3>Primary Contact Person</h3>
+                                            <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> @(Model.TCContact?.ContactPersonName ?? "")</p>
+                                            <p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> @(Model.TCContact?.ContactPersonPhone ?? "")</p>
+                                            <p><span class="glyphicon glyphicon-home" aria-hidden="true"></span> @(Model.TCContact?.ContactPersonEmail ?? "")</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 hidden-sm-down">
+                    <div class="box-details">
+
+                        <div>
+                            <h2>Summary</h2>
+                            <p>@(Model.TCBusinessInfo?.BusinessSummary ?? "")</p>
+                        </div>
+
+                        <div>
+                            <h2>Overview</h2>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td>@(Model.Country?.CountryName ?? "")</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Established</td>
+                                        <td>@(Model.TCBusinessInfo?.Established ?? 0)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Business Models</td>
+                                        <td>
+                                            @foreach (var businessModel in Model.BusinessModelToTC)
+                                            {
+                                                <a data-toggle="tooltip" class="tip-bottom" data-original title="@Html.DisplayFor(item => businessModel.BusinessModel.Description)">
+                                                    @Html.DisplayFor(item => businessModel.BusinessModel.BusinessModelName)
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maturity stage</td>
+                                        <td>
+                                            <a data-toggle="tooltip" class="tip-bottom" data-original title="@(Model.TCBusinessInfo?.Maturity?.Description ?? "")">
+                                                @(Model.TCBusinessInfo?.Maturity?.MaturityStageName ?? "")
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Full Time Employees</td>
+                                        <td>
+                                            <a data-toggle="tooltip" class="tip-bottom" data-original title="@(Model.TCBusinessInfo?.Employees?.Description ?? "")">
+                                                @(Model.TCBusinessInfo?.Employees?.EmployeeTypeName ?? "")
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Revenue</td>
+                                        <td>
+                                            <a data-toggle="tooltip" class="tip-bottom" data-original title="@(Model.TCBusinessInfo?.Revenue?.Description ?? "")">
+                                                @(Model.TCBusinessInfo?.Revenue?.RevenueName ?? "")
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Profit Making</td>
+                                        <td>@(Model.TCBusinessInfo?.ProfitMaking ?? false)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Last updated</td>
+                                        <td>@(Model.TCGeneral?.LastUpdated.ToString("dd/MM/yyyy") ?? "")</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="tech-tags row">
+                            <div class="col col-xs-12">
+                                <h2>Tags</h2>
+
+                                @foreach (var tag in Model.TechTagToTC)
+                                {
+                                    <div class="tech-tags-item"><a data-toggle="tooltip" class="tip-bottom" data-original title="@Html.DisplayFor(item => tag.TechTag.Description)">@Html.DisplayFor(item => tag.TechTag.TagName)</a></div>
+                                }
+                            </div>
+                        </div>
+                        <div>
+                            <h2>Rating</h2>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Business Maturity Level</td>
+                                        <td>@(Model.TCRating?.BMLConfidenceIndex ?? 0)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Technology Maturity Level</td>
+                                        <td>@(Model.TCRating?.TMLConfidenceIndex ?? 0)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        var __slice = [].slice;
+
+        (function ($, window) {
+            var RatingDots;
+            RatingDots = (function () {
+                RatingDots.prototype.defaults = {
+                    rating: void 0,
+                    numStars: 3,
+                    change: function (e, value) { }
+                };
+
+                function RatingDots($el, options) {
+                    var i, _, _ref,
+                        _this = this;
+                    this.options = $.extend({}, this.defaults, options);
+                    this.$el = $el;
+                    _ref = this.defaults;
+                    for (i in _ref) {
+                        _ = _ref[i];
+                        if (this.$el.data(i) != null) {
+                            this.options[i] = this.$el.data(i);
+                        }
+                    }
+                    this.createStars();
+                    this.syncRating();
+                }
+
+                RatingDots.prototype.createStars = function () {
+                    var _i, _ref, _results;
+                    _results = [];
+                    for (_i = 1, _ref = this.options.numStars; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--) {
+                        _results.push(this.$el.append("<span class='glyphicon .glyphicon-circle-empty'></span>"));
+                    }
+                    return _results;
+                };
+
+                RatingDots.prototype.syncRating = function (rating) {
+                    var i, _i, _j, _ref;
+                    rating || (rating = this.options.rating);
+                    if (rating) {
+                        for (i = _i = 0, _ref = rating - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+                            this.$el.find('span').eq(i).removeClass('glyphicon-circle-empty').addClass('glyphicon-circle-full');
+                        }
+                    }
+                    if (rating && rating < 3) {
+                        for (i = _j = rating; rating <= 4 ? _j <= 4 : _j >= 4; i = rating <= 4 ? ++_j : --_j) {
+                            this.$el.find('span').eq(i).removeClass('glyphicon-circle-full').addClass('glyphicon-circle-empty');
+                        }
+                    }
+                    if (!rating) {
+                        return this.$el.find('span').removeClass('glyphicon-circle-full').addClass('glyphicon-circle-empty');
+                    }
+                };
+                return RatingDots;
+            })();
+            return $.fn.extend({
+                RatingDots: function () {
+                    var args, option;
+                    option = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+                    return this.each(function () {
+                        var data;
+                        data = $(this).data('star-rating');
+                        if (!data) {
+                            $(this).data('star-rating', (data = new RatingDots($(this), option)));
+                        }
+                        if (typeof option === 'string') {
+                            return data[option].apply(data, args);
+                        }
+                    });
+                }
+            });
+        })(window.jQuery, window);
+
+        $(function () {
+            return $(".RatingDots").RatingDots();
+        });
+    </script>

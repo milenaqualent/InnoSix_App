@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Edit Products";
+}
+
+<section class="edit-company-details product-details">
+    
+    @Html.Partial("NavigationEditMenu")
+
+    <section class="mvc-table mt-15">
+
+        @Html.Action("ProductsGridViewPartial")
+
+    </section>
+</section>

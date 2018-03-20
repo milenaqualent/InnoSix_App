@@ -1,0 +1,13 @@
+﻿@model InnosixWebApp.Models.TCBasicInfo
+
+@{
+    ViewBag.Title = $"Add {Model.CompanyName} to portfolio";
+}
+
+<h2 class="title">Add @Model.CompanyName to portfolio</h2>
+
+<p class="red">@ViewBag.Message</p>
+<section class="mvc-table add-company-to-portfolio">
+
+    @Html.Action("AddToPortfolioGridViewPartial", new { id = Model.Id })
+</section>

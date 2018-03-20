@@ -1,0 +1,34 @@
+﻿<div class="row edit-company-header">
+    <div class="col col-xs-12">
+        <h2>Edit your company profile</h2>
+    </div>
+</div>
+
+@{
+    var tcId = Url.RequestContext.RouteData.Values["id"];
+    var absoluteUri = Request.Url.AbsoluteUri;
+}
+
+<ul class="item item-menu nav nav-tabs" role="tablist">
+    <li role="presentation" class="@(absoluteUri.EndsWith("/Admin/TcEdit/" + tcId) ? "active" : string.Empty)">
+        @Html.ActionLink("Profile basics", "TcEdit", "Admin", new { id = tcId }, null)
+    </li>
+    <li role="presentation" class="@(absoluteUri.EndsWith("/Admin/TcEditBusinessInfo/" + tcId) ? "active" : string.Empty)">
+        @Html.ActionLink("Business description", "TcEditBusinessInfo", "Admin", new { id = tcId }, null)
+    </li>
+    <li role="presentation" class="@(absoluteUri.EndsWith("/Admin/TcEditTechnology/" + tcId) ? "active" : string.Empty)">
+        @Html.ActionLink("Technology R/D", "TcEditTechnology", "Admin", new { id = tcId }, null)
+    </li>
+    <li role="presentation" class="@(absoluteUri.EndsWith("/Admin/TcEditIdealPartner/" + tcId) ? "active" : string.Empty)">
+        @Html.ActionLink("Ideal partner", "TcEditIdealPartner", "Admin", new { id = tcId }, null)
+    </li>
+    <li role="presentation" class="@(absoluteUri.EndsWith("/Admin/TcEditProducts/" + tcId) ? "active" : string.Empty)">
+        @Html.ActionLink("Products", "TcEditProducts", "Admin", new { id = tcId }, null)
+    </li>
+    <li role="presentation" class="@(absoluteUri.EndsWith("/Admin/TcEditContact/" + tcId) ? "active" : string.Empty)">
+        @Html.ActionLink("Contact", "TcEditContact", "Admin", new { id = tcId }, null)
+    </li>
+    <li role="presentation" class="@(absoluteUri.EndsWith("/Admin/TcEditRating/" + tcId) ? "active" : string.Empty)">
+        @Html.ActionLink("Rating", "TcEditRating", "Admin", new { id = tcId }, null)
+    </li>
+</ul>

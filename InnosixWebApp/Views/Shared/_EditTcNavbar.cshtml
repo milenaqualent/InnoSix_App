@@ -1,0 +1,13 @@
+﻿@model bool
+
+@if (Request.IsAuthenticated && User.IsInRole("TC"))
+{
+    if (Model)
+    {
+        <li>@Html.ActionLink("Edit company profile", "Edit", "TechCompany")</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("Manage account", "Index", "Manage")</li>
+    }
+}

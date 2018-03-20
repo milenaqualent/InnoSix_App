@@ -1,0 +1,29 @@
+﻿<div class="row edit-company-header">
+    <div class="col col-xs-12">
+        <h2>Edit your company profile</h2>
+    </div>
+</div>
+
+<ul class="item item-menu nav nav-tabs" role="tablist">
+    <li role="presentation" class="@(@Request.Url.AbsoluteUri.EndsWith("/TechCompany/Edit") ? "active" : string.Empty)">
+        @Html.ActionLink("Profile basics", "Edit", "TechCompany")
+    </li>
+    <li role="presentation" class="@(@Request.Url.AbsoluteUri.EndsWith("/TechCompany/EditBusinessInfo") ? "active" : string.Empty)">
+        @Html.ActionLink("Business description", "EditBusinessInfo", "TechCompany")
+    </li>
+    <li role="presentation" class="@(@Request.Url.AbsoluteUri.EndsWith("/TechCompany/EditTechnology") ? "active" : string.Empty)">
+        @Html.ActionLink("Technology R/D", "EditTechnology", "TechCompany")
+    </li>
+    <li role="presentation" class="@(@Request.Url.AbsoluteUri.EndsWith("/TechCompany/EditIdealPartner") ? "active" : string.Empty)">
+        @Html.ActionLink("Ideal partner", "EditIdealPartner", "TechCompany")
+    </li>
+    <li role="presentation" class="@(@Request.Url.AbsoluteUri.EndsWith("/TechCompany/EditProducts") ? "active" : string.Empty)">
+        @Html.ActionLink("Products", "EditProducts", "TechCompany")
+    </li>
+    <li role="presentation" class="@(@Request.Url.AbsoluteUri.EndsWith("/TechCompany/EditContact") ? "active" : string.Empty)">
+        @Html.ActionLink("Contact", "EditContact", "TechCompany")
+    </li>
+    <li role="presentation">
+        @Html.ActionLink("Manage account", "Index", "Manage")
+    </li>
+</ul>

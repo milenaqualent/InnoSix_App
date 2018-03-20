@@ -1,0 +1,62 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "EditTagUnlinkGridView";
+        settings.CallbackRouteValues = new { Controller = "Tags", Action = "EditTagUnlinkGridViewPartial", id = ViewData["id"] };
+
+		settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Tags", Action = "EditTagUnlinkGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Tags", Action = "EditTagUnlinkGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Tags", Action = "EditTagUnlinkGridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+		settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+		settings.KeyFieldName = "Id";
+
+		settings.SettingsPager.Visible = true;
+		settings.Settings.ShowGroupPanel = true;
+		settings.Settings.ShowFilterRow = true;
+		settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+		settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+		settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+		settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+		settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+		settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+                settings.Columns.Add(column =>
+	            {
+	                column.Caption = "#";
+	                column.SetDataItemTemplateContent(c =>
+	                {
+	                    using (Html.BeginForm("EditTagUnlinkGridViewPartialUnlink", "Tags", FormMethod.Post))
+	                    {
+	                        ViewContext.Writer.Write(Html.Hidden("id", ViewData["id"]));
+	                        ViewContext.Writer.Write(Html.Hidden("unlinkTagId", DataBinder.Eval(c.DataItem, "Id")));
+	                        ViewContext.Writer.Write(
+	                            "<div class=\"form-group\">" +
+	                            "<div class=\"col-md-offset-2 col-md-10\">" +
+	                            "<input type=\"submit\" value=\"Unlink\" class=\"btn btn-default btn-unlink\" />" +
+	                            "</div>" +
+	                            "</div>"
+                            );
+	                    }
+	                });
+	                column.Settings.AllowDragDrop = DefaultBoolean.False;
+	                column.Settings.AllowSort = DefaultBoolean.False;
+	            });
+				settings.Columns.Add("Id");
+				settings.Columns.Add("TagName");
+				settings.Columns.Add("ParentsCount");
+				settings.Columns.Add("ChildrenCount");
+				settings.Columns.Add("UsageCount");
+	            settings.Columns.Add("Description");
+	});
+		if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

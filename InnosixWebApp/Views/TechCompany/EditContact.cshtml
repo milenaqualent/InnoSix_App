@@ -1,0 +1,65 @@
+﻿@model InnosixWebApp.Models.TCContact
+
+@{
+    ViewBag.Title = "Edit Contact";
+}
+
+<section class="edit-company-details">
+
+    @Html.Partial("NavigationEditMenu")
+    
+    @ViewBag.Message
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal edit-technology mt-15">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.TCid)
+
+            <div class="form-group">
+                <label class="control-label col-md-3">Contact person email <span class="text-danger">*</span></label>
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.ContactPersonEmail, new { htmlAttributes = new { @class = "form-control", type = "email", required = "requried" } })
+                    @Html.ValidationMessageFor(model => model.ContactPersonEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">Contact person phone <span class="text-danger">*</span></label>
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.ContactPersonPhone, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    @Html.ValidationMessageFor(model => model.ContactPersonPhone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">Contact person name <span class="text-danger">*</span></label>
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row mt-15 btn-section">
+                <div class="col-md-6">
+                    @Html.ActionLink("Back", "Index", "TechCompany", null, new { @class = "btn btn-default" })
+                </div>
+                <div class="text-right col-md-6">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+</section>

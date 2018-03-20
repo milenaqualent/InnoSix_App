@@ -1,0 +1,261 @@
+﻿@model List<InnosixWebApp.Models.ReportViewModel>
+
+@{
+    Layout = null;
+}
+
+@{
+    var logoArray = File.ReadAllBytes(Server.MapPath("/Content/imgs/innosix-logo.png"));
+    var base64Logo = Convert.ToBase64String(logoArray);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>INNOSIX RAPORT</title>
+        <style>
+            body {
+                font-family: 'Open Sans', sans-serif;
+                color: #010101;
+            }
+
+            .container {
+                width: 1280px;
+                margin: 20px auto;
+            }
+
+            .w-25 {
+                display: block;
+                width: 25%;
+                float: left;
+            }
+
+            .w-49 {
+                display: block;
+                width: 49%;
+                float: left;
+                margin-right: 1%;
+            }
+
+            .w-50 {
+                display: block;
+                width: 50%;
+                float: left;
+            }
+
+            .w-100 {
+                display: block;
+                width: 100%;
+                float: left;
+            }
+
+            .mb-20 {
+                margin-bottom: 20px;
+            }
+
+            .italic-style {
+                font-style: italic;
+            }
+
+            .text-right {
+                text-align: right;
+                float: right;
+            }
+
+            .company-elem h3 {
+                font-size: 14px;
+                color: #fff;
+                background: #15536d;
+                font-weight: lighter;
+                padding: 2px;
+                margin-bottom: 0;
+            }
+
+            .company-elem p {
+                font-size: 12px;
+                margin-bottom: 0;
+                margin-top: 0;
+            }
+
+            .company-elem img {
+                max-width: 300px;
+            }
+
+            .company-elem h4 {
+                font-size: 12px;
+                color: #555;
+                margin-top: 0;
+                margin-bottom: 3px;
+                text-transform: uppercase;
+            }
+
+            .company-elem ul {
+                padding: 0;
+            }
+
+            .company-elem li {
+                list-style: none;
+                width: 100%;
+            }
+
+
+            .tech-tags-item {
+                width: auto;
+                float: left;
+                font-size: 12px;
+                padding-right: 20px;
+            }
+
+                .tech-tags-item:before {
+                    content: ' • ';
+                }
+
+            .company-elem-footer {
+                background-color: #ccc;
+                border-bottom: 1px solid #010101;
+                margin-bottom: 10px;
+            }
+
+                .company-elem-footer h4, .company-elem-footer p {
+                    color: #444;
+                    font-size: 12px;
+                    font-weight: bold;
+                    margin-top: 0;
+                    margin-bottom: 0;
+                }
+
+            .report-header img {
+                height: 60px;
+                text-align: right;
+            }
+
+            .report-header p {
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+            .report-header span {
+                font-size: 12px;
+                font-style: italic;
+                font-weight: 100;
+            }
+            .new-page {
+                page-break-before: right;
+                display: block;
+            }
+        
+            @@media print
+            {    
+                .no-print, .no-print *
+                {
+                    display: none !important;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+    <div class="container">
+
+        <div class="report-header w-100">
+            <p class="w-50">DANFOSS SEARCH REPORT</p>
+            <a class="w-50 text-right" href="/">
+                <img src="data:image/png;base64,@base64Logo" />
+            </a>
+            <h2 class="w-100">
+                INTERNAL OPPORTUNITY ASSESSMENT <span class="text-right">@DateTime.Now.ToString("dd-MM-yyyy")</span>
+            </h2>
+        </div>
+
+        @{
+            var iter = 0;
+            var companiesPerPage = 5;
+        }
+
+        @foreach (var companyReport in Model)
+        {
+            {
+                iter++;
+            }
+
+                        <div @(iter % companiesPerPage == 0 ? "class=new-page" : string.Empty)>
+                            <div class="company-elem w-100">
+                                <div class="w-50">
+                                    <h3>@iter. @(companyReport.TcBasicInfo?.CompanyName ?? "")</h3>
+                                    <div class="w-50">
+                                        <div class="w-100">
+                                            <img src="@(companyReport.TcBasicInfo?.LogoUrl ?? "")" />
+                                        </div>
+                                        <p class="italic-style">@(companyReport.TcBasicInfo?.LegalSuffix ?? "")</p>
+                                        <p class="italic-style">@(companyReport.TcBasicInfo?.Country?.CountryName ?? "")</p>
+                                        <p><a href="@(companyReport.TcBasicInfo?.CompanyWebsite ?? "")">@(companyReport.TcBasicInfo?.CompanyWebsite ?? "")</a></p>
+                                    </div>
+                                    <div class="w-50">
+                                        <div class="w-50">
+                                            <h4>Sector &amp; Domains</h4>
+                                            <p>@(companyReport.TcBasicInfo?.TCTechnology?.TechSector?.TechSectorName ?? "")</p>
+                                            <ul>
+                                                @foreach (var td in companyReport.TcBasicInfo.TechDomainToTC)
+                                                {
+                                                    <li class="tech-tags-item">@Html.DisplayFor(item => td.TechDomain.DomainName)</li>
+                                                }
+                                            </ul>
+
+                                        </div>
+                                        <div class="w-50">
+                                            <h4>Tags</h4>
+
+                                            @foreach (var bm in companyReport.TcBasicInfo.TechTagToTC)
+                                            {
+                                                <div class="tech-tags-item">@Html.DisplayFor(item => bm.TechTag.TagName)</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-25">
+                                    <h3>BML @(companyReport.TcBasicInfo?.TCRating?.BML ?? 0)</h3>
+                                    <h4>Business Summary</h4>
+                                    <p>@(companyReport.TcBasicInfo?.TCBusinessInfo?.BusinessSummary ?? "")</p>
+                                </div>
+                                <div class="w-25">
+                                    <h3>TML @(companyReport.TcBasicInfo?.TCRating?.TML ?? 0)</h3>
+                                    <h4>RELEVANCE FOR DANFOSS</h4>
+                                    <p>@(companyReport.PortfolioItem?.Comment ?? "")</p>
+                                </div>
+                            </div>
+                            <div class="company-elem-footer w-100">
+                                <div class="w-25">
+                                    <h4>Opportunity date</h4>
+                                    <p>@(companyReport.PortfolioItem?.OpportunityDate ?? null)</p>
+                                </div>
+                                <div class="w-25">
+                                    <h4>Status</h4>
+                                    <p>@(companyReport.PortfolioItem?.Stage?.Name ?? "")</p>
+                                </div>
+                                <div class="w-25">
+                                    <h4>Next move</h4>
+                                    <p>@(companyReport.PortfolioItem?.Stage1?.Name ?? "") > @(companyReport.PortfolioItem?.NextMoveDate ?? null)</p>
+                                </div>
+                                <div class="w-25">
+                                    <h4>Danfoss contact</h4>
+                                    <p>@(companyReport.PortfolioItem?.ResponsibleEmail ?? "") | @(companyReport.PortfolioItem?.ResponsibleName ?? "")</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+    </div>
+    @if (Model[0].Print)
+    {
+        <div class="no-print">
+            <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded",
+                function() {
+                    window.print();
+                });
+            </script>
+        </div>
+    }
+</body>
+
+</html>

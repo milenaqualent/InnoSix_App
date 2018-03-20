@@ -1,0 +1,320 @@
+﻿@using InnosixWebApp.Models
+@model IEnumerable<InnosixWebApp.Models.VTcWithTagsUser>
+
+@{
+    ViewBag.Title = "User";
+}
+
+<div class="card-header" role="tab" id="headingOne">
+    <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <h5 class="mb-0">
+            Advanced filters
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+        </h5>
+
+    </a>
+</div>
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        <div class="edit-technology technology-filters">
+            <div class="row mt-15">
+                <div class="col-md-8">
+                    <div class="row mt-15">
+                        <div class="col col-xs-12">
+                            @Html.DropDownList("ParentTags", ViewData["ParentTags"] as SelectList, "Select tag", new { id = "tag1", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row mt-15">
+                        <div class="col col-xs-12">
+                            <select class="form-control" id="tag2" name="tag2"></select>
+                        </div>
+                    </div>
+                    <div class="row mt-15">
+                        <div class="col col-xs-12">
+                            <select class="form-control" id="tag3" name="tag3"></select>
+                        </div>
+                    </div>
+                    <div class="row mt-15">
+                        <div class="col col-xs-12">
+                            <select class="form-control" id="tag4" name="tag4"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mt-15">
+                        <div class="col col-xs-12">
+                            <div id="selectedTagList">Selected tag:</div>
+                        </div>
+                    </div>
+                    <div class="row mt-15">
+                        <h5 id="activeSelectedTag">None selected</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-15">
+                <div class="col col-xs-12 text-right">
+                    <button type="button" onclick="addTagToList()" class="btn btn-default">Add Tag</button>
+                </div>
+            </div>
+
+
+
+            @using (Html.BeginForm("Index", "User", FormMethod.Post))
+            {
+                <div class="row mt-15">
+                    <div id="addTagList" class="tech-tags col-xs-12">
+                        <div>Added tags:</div>
+                        @foreach (var tag in (List<TechTag>)ViewData["Tags"])
+                {
+                            <div class="tech-tags-item">
+                                <input type="hidden" name="tagIds[]" value="@tag.Id" />
+                                <a data-toggle="tooltip" class="tip-bottom" data-original data-id="@tag.Id" data-name="@tag.TagName" title="@tag.Description">
+                                    @tag.TagName
+                                </a>
+                                <span class="remove-btn" onclick="removeListElement('div a[data-id=&quot;@tag.Id&quot;]')">X</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+                    <div class="row mt-15">
+                        <div class="col-md-2">
+                            @Html.Label("Include Parents")
+                            @Html.CheckBox("IncludeParents", false)
+                        </div>
+                        <div class="col-md-2 col-md-offset-2">
+                            @Html.Label("Include Siblings")
+                            @Html.CheckBox("IncludeSiblings", false)
+                        </div>
+                        <div class="col-md-3 col-md-offset-3">
+                            @Html.Label("Include in level range")
+                            @Html.TextBox("levelRange", 0, new { type = "number", min = "0", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="multiselect-btns mt-15">
+                        <div class="row mt-15">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        @Html.Label("Countries")
+                                    </div>
+                                    <div class="col-xs-8">
+                                        @Html.ListBox("countries", (MultiSelectList)ViewData["Countries"], new { @class = "multi-select", size = 5 })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        @Html.Label("Technology domain")
+                                    </div>
+                                    <div class="col-xs-8">
+                                        @Html.ListBox("techDomains", (MultiSelectList)ViewData["TechDomain"], new { @class = "multi-select", size = 5 })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        @Html.Label("Maturity stage")
+                                    </div>
+                                    <div class="col-xs-8">
+                                        @Html.ListBox("maturityStages", (MultiSelectList)ViewData["MaturityStage"], new { @class = "multi-select", size = 5 })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        @Html.Label("Revenue")
+                                    </div>
+                                    <div class="col-xs-8">
+                                        @Html.ListBox("revenues", (MultiSelectList)ViewData["Revenue"], new { @class = "multi-select", size = 5 })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        @Html.Label("Employees")
+                                    </div>
+                                    <div class="col-xs-8">
+                                        @Html.ListBox("employees", (MultiSelectList)ViewData["Employees"], new { @class = "multi-select", size = 5 })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        @Html.Label("Business Model")
+                                    </div>
+                                    <div class="col-xs-8">
+                                        @Html.ListBox("businessModels", (MultiSelectList)ViewData["BusinessModel"], new { @class = "multi-select", size = 5 })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-6 mt-15 btn-no-row">
+                        <input type="submit" onclick="onSubmitClick();" value="Filter" class="btn btn-default" />
+                    </div>
+
+
+
+            }
+            <div class="col-xs-6 mt-15 text-right btn-no-row">
+                @Html.ActionLink("Clear filters", "Index", "User", null, new { @class = "btn btn-default" })
+            </div>
+
+
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("Export", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="submit" value="Csv" class="btn btn-primary mt-15" />
+
+        <section class="mvc-table user-index-table">
+            @Html.Partial("_TCsGridViewPartial", Model)
+        </section>
+}
+
+<script type="text/jscript">
+
+    $(function () {
+        $('#tag1').change(function () {
+            $('#tag2, #tag3, #tag4').find('option').remove();
+            getTagChildList('#tag1', '#tag2');
+            changeTagSelected();
+        });
+
+        $('#tag2').change(function () {
+            $('#tag3, #tag4').find('option').remove();
+            getTagChildList('#tag2', '#tag3');
+            changeTagSelected();
+        });
+
+        $('#tag3').change(function () {
+            $('#tag4').find('option').remove();
+            getTagChildList('#tag3', '#tag4');
+            changeTagSelected();
+        });
+
+        $('#tag4').change(function () {
+            changeTagSelected();
+        });
+
+        function getTagChildList(selectParentId, selectChildId) {
+            $.getJSON('/User/TagChildList/' + $(selectParentId).val(), function (data) {
+                if (data.length <= 0)
+                    return false;
+                var items = '<option>Select tag</option>';
+                $.each(data, function (i, tag) {
+                    items += "<option value='" + tag.Value + "'>" + tag.Text + "</option>";
+                });
+                $(selectChildId).html(items);
+            });
+        };
+    });
+
+    function addTagToList() {
+        if (isNumeric($('#tag4').val())) {
+            if (checkIfAlreadyAdded($('#tag4').val()))
+                return false;
+            createListElement('#tag4');
+            return false;
+        }
+        if (isNumeric($('#tag3').val())) {
+            if (checkIfAlreadyAdded($('#tag3').val()))
+                return false;
+            createListElement('#tag3');
+            return false;
+        }
+        if (isNumeric($('#tag2').val())) {
+            if (checkIfAlreadyAdded($('#tag2').val()))
+                return false;
+            createListElement('#tag2');
+            return false;
+        }
+        if (isNumeric($('#tag1').val())) {
+            if (checkIfAlreadyAdded($('#tag1').val()))
+                return false;
+            createListElement('#tag1');
+            return false;
+        }
+    };
+
+    function checkIfAlreadyAdded(id) {
+        var elId = 'a[data-id="{0}"]'.format(id);
+        if ($(elId).length) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    function createListElement(elementId) {
+        $('#addTagList').append(
+            '<div class="tech-tags-item"><input type="hidden" name="tagIds[]" value="{0}" /><a data-id="{0}" data-name="{1}">{1} </a><span class="remove-btn" onclick="removeListElement(\'div a[data-id=&quot;{0}&quot;]\')">X</span></div>'
+                .format($(elementId).val(), getTagName($(elementId + ' option:selected').text())));
+    };
+
+    function removeListElement(tag) {
+        $(tag).parent().remove();
+    };
+
+    function changeTagSelected() {
+        var breadcrumbs = "Selected tag: ";
+        var selectedTag = "Non selected";
+
+        if (isNumeric($('#tag1').val())) {
+            breadcrumbs += getTagName($('#tag1' + ' option:selected').text());
+            selectedTag = getTagName($('#tag1' + ' option:selected').text());
+        }
+        if (isNumeric($('#tag2').val())) {
+            breadcrumbs += ' > ';
+            breadcrumbs += getTagName($('#tag2' + ' option:selected').text());
+            selectedTag = getTagName($('#tag2' + ' option:selected').text());
+        }
+        if (isNumeric($('#tag3').val())) {
+            breadcrumbs += ' > ';
+            breadcrumbs += getTagName($('#tag3' + ' option:selected').text());
+            selectedTag = getTagName($('#tag3' + ' option:selected').text());
+        }
+        if (isNumeric($('#tag4').val())) {
+            breadcrumbs += ' > ';
+            breadcrumbs += getTagName($('#tag4' + ' option:selected').text());
+            selectedTag = getTagName($('#tag4' + ' option:selected').text());
+        }
+
+        $('#selectedTagList').html(breadcrumbs);
+        $('#activeSelectedTag').html(selectedTag);
+    };
+
+    function getTagName(value) {
+        var index = value.indexOf(' - ');
+        return value.substring(0, index);
+    };
+
+    function isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    };
+
+    function onSubmitClick() {
+        $('#DXScript').remove();
+        $('#DXCss').remove();
+    }
+
+    $(document).ready(function () {
+        $('.multi-select').multiselect();
+    });
+
+</script>

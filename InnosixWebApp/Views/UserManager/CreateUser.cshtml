@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Create user";
+}
+
+<h2>Create user</h2>
+
+@ViewBag.Message
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+        <div class="form-group">
+            @Html.Label("Email", new {@class = "control-label col-md-2 edit-form-label"})
+            <div class="col-md-10">
+                @Html.Editor("Email", new {htmlAttributes = new {@class = "form-control edit-form-input", type = "email"}})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Role", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownList("Role", (SelectList) ViewData["Roles"], new {@class = "form-control edit-form-input" })
+            </div>
+        </div>
+
+        <div class="row form-group btn-section">
+            <div class="col col-xs-6">
+                @Html.ActionLink("Back", "Index", "", new {@class = "btn back-btn"})
+            </div>
+            <div class="col col-xs-6 text-right">
+                <input type="submit" value="Save" class="btn btn-primary"/>
+            </div>
+        </div>
+    </div>
+}

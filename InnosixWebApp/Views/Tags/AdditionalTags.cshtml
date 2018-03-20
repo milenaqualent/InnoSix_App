@@ -1,0 +1,20 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Additional tags";
+}
+
+<div class="title">
+    <h2>Additional tags</h2>
+</div>
+
+<div class="row">
+    <div class="col col-xs-12 info-text">
+        @ViewBag.Message
+    </div>
+</div>
+
+<section class="mvc-table additional-tag-table">
+    @Html.Action("AdditionalTagsGridViewPartial")
+</section>
+

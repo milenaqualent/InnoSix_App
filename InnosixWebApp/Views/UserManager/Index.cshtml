@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "User Manager";
+}
+
+<h2 class="title">User Manager</h2>
+
+
+@Html.ActionLink("Create new user", "CreateUser", "UserManager", null, new { @class = "btn btn-primary" })
+
+
+<section class="mvc-table">
+    @Html.Action("UserGridViewPartial")
+</section>
+

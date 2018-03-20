@@ -1,0 +1,417 @@
+﻿@model InnosixWebApp.Models.ReportViewModel
+
+@{
+    Layout = null;
+}
+
+@{
+    var logoArray = File.ReadAllBytes(Server.MapPath("/Content/imgs/innosix-logo-black.png"));
+    var base64Logo = Convert.ToBase64String(logoArray);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>INNOSIX RAPORT</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #010101;
+        }
+
+        .container {
+            width: 1280px;
+            margin: 20px auto;
+        }
+
+        .w-49 {
+            display: block;
+            width: 49%;
+            float: left;
+            margin-right: 1%;
+        }
+
+        .w-50 {
+            display: block;
+            width: 50%;
+            float: left;
+        }
+
+        .w-100 {
+            display: block;
+            width: 100%;
+            float: left;
+        }
+
+        .mb-20{
+            margin-bottom:20px;
+        }
+
+        .uppercase-elem {
+            text-transform: uppercase;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .report-header, .company-header {
+            border-bottom: 1px solid #010101;
+        }
+
+            .report-header img {
+                height: 60px;
+            }
+
+            .report-header p {
+                text-align: right;
+                margin-bottom: 0;
+                margin-top: 35px;
+                font-size: 12px;
+                width:100%;
+                float:right;
+                margin-top:0;
+            }
+
+                .report-header p span {
+                    margin-left: 40px;
+                }
+
+            .report-header a {
+                float: left;
+            }
+
+        .company-header, #company-details {
+            width: 100%;
+            display: block;
+            float: left;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+            .company-header img {
+                max-height: 200px;
+                height: auto;
+                margin-top: 30px;
+                float: right;
+                margin-right: 20px;
+            }
+
+            .company-header h1 {
+                font-size: 30px;
+                font-weight: lighter;
+                margin-bottom: 5px;
+            }
+
+            .company-header h3 {
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 0;
+                margin-top: 0;
+            }
+
+            .company-header p {
+                font-size: 14px;
+                font-weight: 300;
+                font-style: italic;
+                margin-top: 5px;
+            }
+
+            .company-details h3 {
+                color: #fff;
+                background-color: #9d9d9d;
+                padding: 1px;
+                margin-top: 0;
+                font-size: 16px;
+                font-weight: 300;
+                text-transform: uppercase;
+                margin-bottom: 0;
+            }
+
+            .company-details p {
+                margin-top: 0;
+                font-size:12px;
+            }
+
+        .table-section {
+            background-color: #eee;
+        }
+
+        .company-details .table, .company-details p {
+            font-size: 12px;
+        }
+
+        .company-details .table {
+            width: 100%;
+            padding: 1px;
+        }
+
+        .tech-tags-item {
+            width: auto;
+            float: left;
+            font-size: 12px;
+            padding-right: 20px;
+        }
+
+            .tech-tags-item:before {
+                content: ' • ';
+            }
+
+        .report-tab-header {
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            height: 50px;
+            vertical-align: top;
+        }
+
+        .company-details .report-red-header h3 {
+            background-color: #AD1111;
+        }
+
+        .company-details p a {
+            color: #010101;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .text-right{
+            float:right;
+        }
+        
+        @@media print
+        {    
+            .no-print, .no-print *
+            {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="report-header w-100">
+            <a href="/">
+                <img src="data:image/png;base64,@base64Logo"/>
+            </a>
+            <p>
+                COMPANY REPORT <span>@DateTime.Now.ToString("dd-MM-yyyy")</span>
+            </p>
+        </div>
+
+
+        <div class="company-header">
+            <div class="w-50">
+                <h1>@(Model.TcBasicInfo?.CompanyName ?? "")</h1>
+                <h3>@(Model.TcBasicInfo?.TCTechnology?.TechSector?.TechSectorName ?? "")</h3>
+                <p>
+                    @foreach (var bm in Model.TcBasicInfo.TechDomainToTC)
+                    {
+                        @Html.DisplayFor(item => bm.TechDomain.DomainName)
+                    }
+                </p>
+            </div>
+            <div class="w-50">
+                <img src="@(Model.TcBasicInfo?.LogoUrl ?? "")" />
+            </div>
+        </div>
+
+
+        <div class="company-details">
+            <div class="w-49 mb-20">
+                <h3>Business Summary</h3>
+                <p>
+                    @(Model.TcBasicInfo?.TCBusinessInfo?.BusinessSummary ?? "")
+                </p>
+            </div>
+
+            <div class="w-50 table-section mb-20">
+                <h3>Business Summary</h3>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="uppercase-elem">Country</td>
+                            <td>@(Model.TcBasicInfo?.Country?.CountryName ?? "")</td>
+                        </tr>
+                        <tr>
+                            <td class="uppercase-elem">Established</td>
+                            <td>@(Model.TcBasicInfo?.TCBusinessInfo?.Established ?? 0)</td>
+                        </tr>
+                        <tr>
+                            <td class="uppercase-elem">Business Models</td>
+                            <td>
+                                @foreach (var bm in Model.TcBasicInfo.BusinessModelToTC)
+                                {
+                                        @Html.DisplayFor(item => bm.BusinessModel.BusinessModelName)
+                                }
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="uppercase-elem">Maturity stage</td>
+                            <td>
+                                @(Model.TcBasicInfo?.TCBusinessInfo?.Maturity?.MaturityStageName ?? "")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="uppercase-elem">Full Time Employees</td>
+                            <td>
+                                @(Model.TcBasicInfo?.TCBusinessInfo?.Employees?.EmployeeTypeName ?? "")
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="uppercase-elem">Revenue</td>
+                            <td>
+                                @(Model.TcBasicInfo?.TCBusinessInfo?.Revenue?.RevenueName ?? "")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="uppercase-elem">Profit Making</td>
+                            <td>@(Model.TcBasicInfo?.TCBusinessInfo?.ProfitMaking ?? false)</td>
+
+                        </tr>
+                        <tr>
+                            <td class="uppercase-elem">NACE code</td>
+                            <td>@(Model.TcBasicInfo?.TCBusinessInfo?.Nace?.NACEcode ?? "")</td>
+                        </tr>
+
+                        <tr>
+                            <td class="uppercase-elem">Company profile created</td>
+                            <td>@(Model.TcBasicInfo?.TCGeneral?.Created.ToString("dd/MM/yyyy") ?? "")</td>
+                        </tr>
+                        <tr>
+                            <td class="uppercase-elem">Last updated</td>
+                            <td>@(Model.TcBasicInfo?.TCGeneral?.LastUpdated.ToString("dd/MM/yyyy") ?? "")</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="w-100 mb-20">
+                <h3>Technology tags</h3>
+                @foreach (var bm in Model.TcBasicInfo.TechTagToTC)
+                {
+                    <div class="tech-tags-item"><a data-toggle="tooltip" class="tip-bottom" data-original title="@Html.DisplayFor(item => bm.TechTag.Description)">@Html.DisplayFor(item => bm.TechTag.TagName)</a></div>
+                }
+            </div>
+
+            <div class="w-100 mb-20">
+                <h3>RATING <span class="text-right">@(Model.TcBasicInfo?.TCRating?.RatingDate.ToString("dd-MM-yyyy") ?? "")</span></h3>
+                <div class="w-49">
+                    <table class="table ">
+                        <tbody>
+                            <tr class="report-tab-header">
+                                <th>Business Readiness Level</th>
+                                <th>
+                                    @(Model.TcBasicInfo?.TCRating?.BML ?? 0)
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>Fundamentals</td>
+                                <td>@(Model.TcBasicInfo?.TCRating?.Fundamentals ?? 0)</td>
+                            </tr>
+                            <tr>
+                                <td>Finanicals</td>
+                                <td>@(Model.TcBasicInfo?.TCRating?.Financials ?? 0)</td>
+                            </tr>
+                            <tr>
+                                <td>Management and Execution</td>
+                                <td>@(Model.TcBasicInfo?.TCRating?.ManagementAndExecution ?? 0)</td>
+                            </tr>
+                            <tr>
+                                <td>Market</td>
+                                <td>@(Model.TcBasicInfo?.TCRating?.Fundamentals ?? 0)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="w-50">
+                    <table class="table ">
+                        <tbody>
+                            <tr class="report-tab-header">
+                                <th>Technology Readiness Level</th>
+                                <th>
+                                    @(Model.TcBasicInfo?.TCRating?.TML ?? 0)
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>Technology</td>
+                                <td>@(Model.TcBasicInfo?.TCRating?.Technology ?? 0)</td>
+                            </tr>
+                            <tr>
+                                <td>Intellectual property</td>
+                                <td>@(Model.TcBasicInfo?.TCRating?.IntellectualProperty ?? 0)</td>
+                            </tr>
+                            <tr>
+                                <td>Technology Risk</td>
+                                <td>@(Model.TcBasicInfo?.TCRating?.TechnologyRisk ?? 0)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="w-49 mb-20">
+                <h3>KEY COMPETITORS</h3>
+                <p>@(Model.TcBasicInfo?.TCBusinessInfo?.KeyCompetitors ?? "")</p>
+            </div>
+
+            <div class="w-50 mb-20">
+                <h3>KEY PARTNERS</h3>
+                <p>@(Model.TcBasicInfo?.TCBusinessInfo?.KeyPartners ?? "")</p>
+            </div>
+
+            <div class="w-100 report-red-header mb-20">
+                <h3>RELEVANCE FOR DANFOSS</h3>
+                <p>@(Model.PortfolioItem?.Comment ?? "")</p>
+            </div>
+
+            <div class="w-100 mb-20">
+                <h3>CONTACT INFORMATION</h3>
+                <div class="w-49">
+                    <p>@(Model.TcBasicInfo?.CompanyName ?? "")</p>
+                    <p>@(Model.TcBasicInfo?.Address1 ??""), @(Model.TcBasicInfo?.Address2 ?? ""), @(Model.TcBasicInfo?.Address3 ?? "")</p>
+                    <p>@(Model.TcBasicInfo?.Zip ?? "") @(Model.TcBasicInfo?.City ?? "")</p>
+                    <p>@(Model.TcBasicInfo?.CompanyPhone ?? "")</p>
+                    <p>@(Model.TcBasicInfo?.CompanyEmail ?? "")</p>
+                    <p><a href="@(Model.TcBasicInfo?.CompanyWebsite ?? "")">@(Model.TcBasicInfo?.CompanyWebsite ?? "")</a></p>
+                </div>
+                <div class="w-50">
+                    <p>@(Model.TcBasicInfo?.TCContact?.ContactPersonName ?? "")</p>
+                    <p>@(Model.TcBasicInfo?.TCContact?.ContactPersonPhone ?? "")</p>
+                    <p>@(Model.TcBasicInfo?.TCContact?.ContactPersonEmail ?? "")</p>
+                </div>
+            </div>
+
+            <div class="w-100 mb-20">
+                <h3>COMPANY DESCRIPTION </h3>
+                <p>@(Model.TcBasicInfo?.TCBusinessInfo?.CompanyDescription ?? "")</p>
+            </div>
+
+            <div class="w-100 mb-20">
+                <h3>TECHNOLOGY AND R&D ACTIVITIES</h3>
+                <p>@(Model.TcBasicInfo?.TCBusinessInfo?.FTEyear ?? 0)</p>
+            </div>
+            <div class="w-100 mb-20">
+                <h3>PRODUCTS/SERVICES</h3>
+                <p>Product name and desc</p>
+            </div>
+
+        </div>
+    </div>
+    @if (Model.Print)
+    {
+        <div class="no-print">
+            <script type="text/javascript">
+                document.addEventListener("DOMContentLoaded",
+                    function() {
+                        window.print();
+                    });
+            </script>
+        </div>
+    }
+</body>
+
+</html>
